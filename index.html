@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Välj Spelkategori</title>
+    <title>Dart Score App</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="game-container">
-        <h1>Välj Spelkategori</h1>
-        <div class="button-grid">
-            <button class="main-btn" onclick="selectGame('x01')">X01</button>
-        </div>
+        <h1>Välkommen till Dart Score</h1>
+        <button class="main-btn" onclick="goToGameSelection()">Välj Spel</button>
     </div>
+
     <script>
-        function selectGame(category) {
-            localStorage.setItem("gameCategory", category);
+        function goToGameSelection() {
             window.location.href = "game.html";
         }
     </script>
