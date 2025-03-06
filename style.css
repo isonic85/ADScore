@@ -39,29 +39,30 @@ h1, h2 {
     display: none;
 }
 
-/* Endast aktiv spelare syns - Smalare box, tajtare text */
+/* Endast aktiv spelare syns - ÄNNU TIGHTARE BOX */
 .player.active {
     display: block;
     background: #f8c471;
     color: black;
-    padding: 8px 12px; /* Minskad padding för tajtare text */
-    border-radius: 8px;
+    padding: 4px 8px; /* Ännu mindre padding för en tajtare box */
+    border-radius: 6px;
     text-align: center;
-    width: 70%; /* Gör boxen smalare */
-    max-width: 280px;
+    width: auto;
+    min-width: 150px;
+    max-width: 220px;
 }
 
 /* Se till att spelarens namn alltid syns korrekt */
 .player.active h2 {
     color: black !important;
-    font-size: 20px; /* Gör namnet lite mindre för bättre balans */
-    margin-bottom: 5px;
+    font-size: 20px;
+    margin-bottom: 2px; /* Mindre mellanrum mellan namn och poäng */
 }
 
-/* Gör poängen större och mer framträdande */
+/* Gör poängen ännu mer framträdande */
 .player.active .score {
     color: black !important;
-    font-size: 40px; /* Ökar storleken på poängen */
+    font-size: 42px; /* Liten justering för bättre synlighet */
     font-weight: bold;
 }
 
