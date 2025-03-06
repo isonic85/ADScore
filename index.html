@@ -9,21 +9,7 @@
 <body>
     <div class="game-container">
         <h1>Välkommen till Dart Score</h1>
-        <button class="main-btn" id="startGame">Välj Spel</button>
+        <button class="next-btn" onclick="window.location.href='game.html'">Välj Spel</button>
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const startButton = document.getElementById("startGame");
-
-            if (startButton) {
-                startButton.addEventListener("click", function() {
-                    window.location.href = "game.html";
-                });
-            } else {
-                console.error("Startknappen kunde inte hittas.");
-            }
-        });
-    </script>
 </body>
 </html>
