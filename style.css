@@ -27,24 +27,23 @@ h1, h2 {
     color: #f8c471;
 }
 
-/* Poängställning */
+/* Poängtavla med karuselleffekt */
 .scoreboard {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
     position: relative;
     width: 100%;
-    height: 100px;
+    height: 120px;
     overflow: hidden;
 }
 
 .player {
-    flex: 0 0 30%;
+    position: absolute;
+    width: 30%;
     padding: 15px;
     border-radius: 10px;
     background: #333;
-    margin: 5px;
     text-align: center;
     color: white;
     opacity: 0.5;
@@ -52,69 +51,43 @@ h1, h2 {
     transition: transform 0.5s ease-in-out, opacity 0.5s;
 }
 
+/* Aktiv spelare - alltid i mitten */
 .player.active {
-    flex: 0 0 40%;
+    width: 40%;
     background: #f8c471;
     color: black !important;
     opacity: 1;
     transform: scale(1);
+    z-index: 2;
 }
 
-/* Roterande effekt för spelarnamn och poäng */
-.scoreboard-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
-.player-wrapper {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.player-card {
-    min-width: 100%;
-    text-align: center;
+/* Föregående spelare - till vänster */
+.player.previous {
+    transform: translateX(-100%) scale(0.8);
     opacity: 0.5;
-    transition: opacity 0.5s;
+    z-index: 1;
 }
 
-.player-card.active {
+/* Nästa spelare - till höger */
+.player.next {
+    transform: translateX(100%) scale(0.8);
+    opacity: 0.5;
+    z-index: 1;
+}
+
+/* Smidig övergång mellan spelare */
+.rotate-animation .player.active {
+    transform: translateX(0) scale(1);
+}
+
+.rotate-animation .player.previous {
+    transform: translateX(-150%) scale(0.7);
+    opacity: 0;
+}
+
+.rotate-animation .player.next {
+    transform: translateX(0) scale(1);
     opacity: 1;
-}
-
-/* Knappar och interaktiva element */
-button {
-    background: #444;
-    color: white;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.1s;
-}
-
-button:hover {
-    background: #666;
-    transform: scale(1.05);
-}
-
-button:active {
-    transform: scale(0.95);
-}
-
-.main-btn {
-    background: #f8c471;
-    color: black;
-}
-
-.main-btn:hover {
-    background: #e0ac5f;
 }
 
 /* Multiplikator-knappar (Enkel, Dubbel, Trippel) */
