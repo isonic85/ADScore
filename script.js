@@ -1,104 +1,43 @@
-let players = JSON.parse(localStorage.getItem("players")) || [
-    { name: "Spelare 1", score: parseInt(localStorage.getItem("gameScore")), hasStarted: false },
-    { name: "Spelare 2", score: parseInt(localStorage.getItem("gameScore")), hasStarted: false }
-];
-
-let currentPlayer = 0;
-let throws = [];
-let multiplier = 1;
-let roundStartScore = players[currentPlayer].score; // Spara poängen vid rundans början
-const difficulty = localStorage.getItem("gameDifficulty") || "straight-in";
-const endRule = localStorage.getItem("gameEndRule") || "double-out";
-
-function renderGame() {
-    document.getElementById("player1-name").textContent = players[0].name;
-    document.getElementById("player1-score").textContent = players[0].score;
-    document.getElementById("player2-name").textContent = players[1].score;
-    document.getElementById("player2-score").textContent = players[1].score;
-
-    document.getElementById("throw1").textContent = throws[0] || "-";
-    document.getElementById("throw2").textContent = throws[1] || "-";
-    document.getElementById("throw3").textContent = throws[2] || "-";
-
-    // Markerar aktuell spelare
-    document.getElementById("player1").classList.toggle("active", currentPlayer === 0);
-    document.getElementById("player2").classList.toggle("active", currentPlayer === 1);
+// Spara spelarnamn i LocalStorage
+function savePlayerName() {
+    const playerName = document.getElementById("playerName").value;
+    if (playerName.trim() !== "") {
+        localStorage.setItem("playerName", playerName);
+        alert("Ditt namn har sparats!");
+    }
 }
 
-function selectMultiplier(value) {
-    multiplier = value;
+// Hantera val av spelläge (Offline, Create, Join)
+function selectGameMode(mode) {
+    localStorage.setItem("gameMode", mode);
     document.querySelectorAll(".multiplier").forEach(button => {
         button.classList.remove("selected");
     });
     event.target.classList.add("selected");
 }
 
-function registerScore(points) {
-    let player = players[currentPlayer];
-
-    if (throws.length === 0) {
-        roundStartScore = player.score; // Spara startpoängen vid första kastet
-    }
-
-    if (throws.length >= 3) {
-        alert("Du har kastat 3 gånger! Nästa spelare tur.");
-        return nextPlayer();
-    }
-
-    let finalScore = points * multiplier;
-
-    if (difficulty === "double-in" && !player.hasStarted) {
-        if (multiplier !== 2) {
-            alert("Du måste starta med en dubbel!");
-            return;
-        }
-        player.hasStarted = true;
-    }
-
-    if (difficulty === "master-in" && !player.hasStarted) {
-        if (multiplier < 2) {
-            alert("Du måste starta med en dubbel eller trippel!");
-            return;
-        }
-        player.hasStarted = true;
-    }
-
-    let newScore = player.score - finalScore;
-
-    if (newScore < 0 || newScore === 1) {
-        alert("Bust! Poängen återställs.");
-        player.score = roundStartScore; // Återställ till poängen vid rundans början
-        return nextPlayer();
-    }
-
-    if (newScore === 0) {
-        if (endRule === "double-out" && multiplier !== 2) {
-            alert("Du måste avsluta med en dubbel!");
-            return;
-        }
-        if (endRule === "master-out" && multiplier < 2) {
-            alert("Du måste avsluta med en dubbel eller trippel!");
-            return;
-        }
-        alert(player.name + " har vunnit spelet!");
-        resetGame();
-        return;
-    }
-
-    player.score = newScore;
-    throws.push(finalScore);
-    renderGame();
-
-    if (throws.length === 3) {
-        setTimeout(nextPlayer, 1000);
-    }
+// Starta spelet och spara inställningar
+function startGame() {
+    const selectedGame = document.getElementById("gameSelect").value;
+    localStorage.setItem("selectedGame", selectedGame);
+    window.location.href = "game.html"; // Navigera vidare
 }
 
-function nextPlayer() {
-    currentPlayer = (currentPlayer + 1) % players.length;
-    throws = [];
-    roundStartScore = players[currentPlayer].score; // Uppdatera startpoängen för nästa spelare
-    renderGame();
-}
+// Ladda sparade inställningar vid sidstart
+document.addEventListener("DOMContentLoaded", function () {
+    // Hämta och sätt tidigare spelarnamn
+    const savedName = localStorage.getItem("playerName");
+    if (savedName) {
+        document.getElementById("playerName").value = savedName;
+    }
 
-document.addEventListener("DOMContentLoaded", renderGame);
+    // Hämta och markera tidigare spelläge
+    const savedGameMode = localStorage.getItem("gameMode");
+    if (savedGameMode) {
+        document.querySelectorAll(".multiplier").forEach(button => {
+            if (button.textContent.toLowerCase() === savedGameMode) {
+                button.classList.add("selected");
+            }
+        });
+    }
+});
