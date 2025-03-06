@@ -117,6 +117,56 @@ button:active {
     background: #e0ac5f;
 }
 
+/* Multiplikator-knappar (Enkel, Dubbel, Trippel) */
+.multiplier-row {
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0;
+}
+
+.multiplier {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background: #444;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.multiplier:hover {
+    background: #666;
+}
+
+.multiplier.selected {
+    background: #ff9800;
+    color: black;
+}
+
+/* Throw-boxar (för kast) */
+.throw-tracker {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.throw-box {
+    width: 50px;
+    height: 50px;
+    background: #444;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
 /* Nästa spelare knapp */
 .next-btn {
     width: 100%;
@@ -128,4 +178,10 @@ button:active {
 
 .next-btn:hover {
     background: #218c53;
+}
+
+/* Markerade val i game.html */
+.selected {
+    background: #ff9800 !important;
+    color: black !important;
 }
