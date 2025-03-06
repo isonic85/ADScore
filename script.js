@@ -6,44 +6,36 @@ let players = JSON.parse(localStorage.getItem("players")) || [
 let currentPlayer = 0;
 let throws = [];
 let multiplier = 1;
-let roundStartScore = players[currentPlayer].score;
+let roundStartScore = players[currentPlayer].score; 
 const difficulty = localStorage.getItem("gameDifficulty") || "straight-in";
 const endRule = localStorage.getItem("gameEndRule") || "double-out";
 
+// Renderar poängtavlan och kastboxar
 function renderGame() {
-    const scoreboard = document.querySelector(".scoreboard");
-    scoreboard.innerHTML = "";
-    
-    let prevPlayer = (currentPlayer - 1 + players.length) % players.length;
-    let nextPlayer = (currentPlayer + 1) % players.length;
-    
-    let prevDiv = document.createElement("div");
-    prevDiv.classList.add("player", "previous");
-    prevDiv.innerHTML = `<h2>${players[prevPlayer].name}</h2><p class="score">${players[prevPlayer].score}</p>`;
-    scoreboard.appendChild(prevDiv);
-    
-    let activeDiv = document.createElement("div");
-    activeDiv.classList.add("player", "active");
-    activeDiv.innerHTML = `<h2>${players[currentPlayer].name}</h2><p class="score">${players[currentPlayer].score}</p>`;
-    scoreboard.appendChild(activeDiv);
-    
-    let nextDiv = document.createElement("div");
-    nextDiv.classList.add("player", "next");
-    nextDiv.innerHTML = `<h2>${players[nextPlayer].name}</h2><p class="score">${players[nextPlayer].score}</p>`;
-    scoreboard.appendChild(nextDiv);
+    document.getElementById("player1-name").textContent = players[0].name;
+    document.getElementById("player1-score").textContent = players[0].score;
+    document.getElementById("player2-name").textContent = players[1].name;
+    document.getElementById("player2-score").textContent = players[1].score;
+
+    document.getElementById("throw1").textContent = throws[0] || "-";
+    document.getElementById("throw2").textContent = throws[1] || "-";
+    document.getElementById("throw3").textContent = throws[2] || "-";
+
+    // Markerar aktiv spelare
+    document.getElementById("player1").classList.toggle("active", currentPlayer === 0);
+    document.getElementById("player2").classList.toggle("active", currentPlayer === 1);
 }
 
-function rotatePlayers() {
-    const scoreboard = document.querySelector(".scoreboard");
-    scoreboard.classList.add("rotate-animation");
-    
-    setTimeout(() => {
-        scoreboard.classList.remove("rotate-animation");
-        currentPlayer = (currentPlayer + 1) % players.length;
-        renderGame();
-    }, 500);
+// Hanterar multiplikatorval
+function selectMultiplier(value) {
+    multiplier = value;
+    document.querySelectorAll(".multiplier").forEach(button => {
+        button.classList.remove("selected");
+    });
+    event.target.classList.add("selected");
 }
 
+// Registrerar kast och beräknar poäng
 function registerScore(points) {
     let player = players[currentPlayer];
 
@@ -53,7 +45,7 @@ function registerScore(points) {
 
     if (throws.length >= 3) {
         alert("Du har kastat 3 gånger! Nästa spelare tur.");
-        return setTimeout(rotatePlayers, 500);
+        return nextPlayer();
     }
 
     let finalScore = points * multiplier;
@@ -79,7 +71,7 @@ function registerScore(points) {
     if (newScore < 0 || newScore === 1) {
         alert("Bust! Poängen återställs.");
         player.score = roundStartScore;
-        return setTimeout(rotatePlayers, 500);
+        return nextPlayer();
     }
 
     if (newScore === 0) {
@@ -101,8 +93,56 @@ function registerScore(points) {
     renderGame();
 
     if (throws.length === 3) {
-        setTimeout(rotatePlayers, 1000);
+        setTimeout(nextPlayer, 1000);
     }
 }
 
-document.addEventListener("DOMContentLoaded", renderGame);
+// Byter till nästa spelare
+function nextPlayer() {
+    currentPlayer = (currentPlayer + 1) % players.length;
+    throws = [];
+    roundStartScore = players[currentPlayer].score;
+    renderGame();
+}
+
+// Markerar val i game.html
+function highlightSelection(selectedElement, parentId) {
+    let buttons = document.getElementById(parentId).getElementsByTagName("button");
+    for (let btn of buttons) {
+        btn.classList.remove("selected");
+    }
+    selectedElement.classList.add("selected");
+}
+
+// Laddar in game.html-val från localStorage
+document.addEventListener("DOMContentLoaded", function() {
+    renderGame();
+
+    let savedGame = localStorage.getItem("gameScore");
+    let savedDifficulty = localStorage.getItem("gameDifficulty");
+    let savedEndRule = localStorage.getItem("gameEndRule");
+
+    if (savedGame) {
+        document.querySelectorAll("#game-options button").forEach(btn => {
+            if (btn.textContent === savedGame) {
+                btn.classList.add("selected");
+            }
+        });
+    }
+
+    if (savedDifficulty) {
+        document.querySelectorAll("#difficulty-options button").forEach(btn => {
+            if (btn.dataset.value === savedDifficulty) {
+                btn.classList.add("selected");
+            }
+        });
+    }
+
+    if (savedEndRule) {
+        document.querySelectorAll("#endrule-options button").forEach(btn => {
+            if (btn.dataset.value === savedEndRule) {
+                btn.classList.add("selected");
+            }
+        });
+    }
+});
