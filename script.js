@@ -1,4 +1,3 @@
-/* script.js */
 let players = [];
 
 function addPlayer() {
