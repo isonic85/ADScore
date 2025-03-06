@@ -9,19 +9,27 @@
 <body>
     <h1>Auto Dart Score App</h1>
     
-    <!-- Video element för kamera -->
+    <!-- Video element för kameran -->
     <video id="video" autoplay playsinline></video>
     
     <!-- Buttons for controlling the game -->
-    <button id="startBtn">Start Game</button>
-    <button id="stopBtn">Stop Game</button>
-    <button id="switchBtn">Switch Camera</button>
-
+    <div id="controls">
+        <button id="startBtn">Start Game</button>
+        <button id="stopBtn">Stop Game</button>
+        <button id="switchBtn">Switch Camera</button>
+    </div>
+    
     <!-- Score display -->
     <div id="score">
-        <p>Player 1: <span id="player1Score">0</span></p>
-        <p>Player 2: <span id="player2Score">0</span></p>
+        <p>Player 1: <span id="player1Score">301</span></p>
+        <p>Player 2: <span id="player2Score">301</span></p>
         <p id="gameMode">Game Mode: X01</p>
+    </div>
+
+    <!-- Dartboard score details -->
+    <div id="dartboardInfo">
+        <p>Current throw: <span id="currentThrow">Player 1</span></p>
+        <p>Current Points: <span id="currentPoints">0</span></p>
     </div>
 
     <script src="script.js"></script>
