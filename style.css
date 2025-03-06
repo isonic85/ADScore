@@ -26,55 +26,6 @@ h1, h2 {
     margin-bottom: 15px;
 }
 
-/* Rutnätslayout för valknappar */
-.button-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-/* Knappar */
-button {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-/* Menyvalsknappar */
-.main-btn {
-    background: #007bff;
-    color: white;
-}
-
-.main-btn:hover {
-    background: #0056b3;
-}
-
-/* Markerad knapp */
-.selected {
-    background: #ff9800 !important;
-    color: black !important;
-}
-
-/* Starta spelet-knapp */
-.next-btn {
-    width: 100%;
-    background: #27ae60;
-    color: white;
-    margin-top: 20px;
-    padding: 15px;
-}
-
-.next-btn:hover {
-    background: #218c53;
-}
-
 /* Poängställning */
 .scoreboard {
     display: flex;
@@ -120,36 +71,6 @@ button {
     align-items: center;
     justify-content: center;
     border-radius: 8px;
-}
-
-/* Enkel, Dubbel, Trippel val */
-.multiplier-row {
-    display: flex;
-    justify-content: space-around;
-    margin: 10px 0;
-}
-
-.multiplier {
-    flex: 1;
-    padding: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    background: #444;
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.multiplier:hover {
-    background: #666;
-}
-
-/* Markerad multiplikator */
-.multiplier.selected {
-    background: #ff9800;
-    color: black;
 }
 
 /* MISS & BULL-knappar på samma rad */
@@ -198,6 +119,36 @@ button {
     background: #0056b3;
 }
 
+/* Enkel, Dubbel, Trippel val (Nu under siffrorna, ovanför "Next Player") */
+.multiplier-row {
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0;
+}
+
+.multiplier {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background: #444;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.multiplier:hover {
+    background: #666;
+}
+
+/* Markerad multiplikator */
+.multiplier.selected {
+    background: #ff9800;
+    color: black;
+}
+
 /* Nästa spelare knapp */
 .next-btn {
     width: 100%;
@@ -209,4 +160,10 @@ button {
 
 .next-btn:hover {
     background: #218c53;
+}
+
+/* Markerade val */
+.selected {
+    background: #ff9800 !important;
+    color: black !important;
 }
