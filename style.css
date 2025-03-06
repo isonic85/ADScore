@@ -1,36 +1,85 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     text-align: center;
-    background: #f4f4f4;
+    background: #121212;
+    color: white;
     margin: 20px;
 }
 
+/* Huvudcontainer */
 .container {
     max-width: 400px;
     margin: auto;
-    background: white;
+    background: #1e1e1e;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
 }
 
+/* Rubriker */
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Knappar */
 button {
-    padding: 10px;
-    margin: 5px;
-    background: blue;
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    background: #007bff;
     color: white;
     border: none;
+    border-radius: 8px;
     cursor: pointer;
-    border-radius: 5px;
+    transition: background 0.3s;
 }
 
 button:hover {
-    background: darkblue;
+    background: #0056b3;
 }
 
-.player-card {
-    background: #ddd;
+/* Inputs och dropdowns */
+.input-group input, select {
+    width: 100%;
     padding: 10px;
+    margin: 8px 0;
+    font-size: 16px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    background: #222;
+    color: white;
+}
+
+/* Spelarkort */
+.player-card {
+    background: #2a2a2a;
+    padding: 15px;
     margin: 10px 0;
-    border-radius: 5px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+/* Poängtext */
+.player-card p {
+    font-size: 18px;
+    font-weight: 600;
+    color: #f8c471;
+}
+
+/* Poängknappar */
+.player-card button {
+    background: #f8c471;
+    color: #121212;
+    font-weight: bold;
+}
+
+.player-card button:hover {
+    background: #d68910;
 }
