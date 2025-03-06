@@ -19,52 +19,14 @@ body {
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
 }
 
-/* Huvudrubriker */
+/* Huvudrubrik */
 h1, h2 {
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 15px;
 }
 
-/* Generell knappstil */
-button {
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    padding: 12px;
-    transition: background 0.3s;
-}
-
-button:hover {
-    opacity: 0.9;
-}
-
-/* Primära knappar */
-.main-btn, .next-btn {
-    width: 100%;
-    background: #007bff;
-    color: white;
-    margin-top: 10px;
-    padding: 15px;
-}
-
-.main-btn:hover {
-    background: #0056b3;
-}
-
-.next-btn {
-    background: #27ae60;
-    margin-top: 20px;
-}
-
-.next-btn:hover {
-    background: #218c53;
-}
-
-/* Poängtavla */
+/* Poängställning */
 .scoreboard {
     display: flex;
     justify-content: space-between;
@@ -90,7 +52,51 @@ button:hover {
     font-weight: bold;
 }
 
-/* Numeriska knappar */
+/* Visar varje kast */
+.throw-tracker {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.throw-box {
+    width: 50px;
+    height: 50px;
+    background: #444;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+/* MISS & BULL-knappar på samma rad */
+.bull-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.bull-row button {
+    flex: 1;
+    margin: 5px;
+    padding: 12px;
+}
+
+.miss {
+    background: #ff4c4c;
+    color: white;
+}
+
+.bull {
+    background: #f1c40f;
+    color: black;
+}
+
+/* Poänginmatning i rutnät */
 .number-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -101,13 +107,19 @@ button:hover {
 .number-grid button {
     background: #007bff;
     color: white;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
 }
 
 .number-grid button:hover {
     background: #0056b3;
 }
 
-/* Multiplikatorval */
+/* Enkel, Dubbel, Trippel val (Nu under siffrorna, ovanför "Next Player") */
 .multiplier-row {
     display: flex;
     justify-content: space-around;
@@ -115,13 +127,14 @@ button:hover {
 }
 
 .multiplier {
-    background: #444;
-    color: white;
+    flex: 1;
     padding: 10px;
     font-size: 16px;
     font-weight: bold;
     border: none;
     border-radius: 8px;
+    background: #444;
+    color: white;
     cursor: pointer;
     transition: background 0.3s;
 }
@@ -130,33 +143,27 @@ button:hover {
     background: #666;
 }
 
+/* Markerad multiplikator */
 .multiplier.selected {
     background: #ff9800;
     color: black;
 }
 
-/* Anpassad knapp-layout för game.html */
-.button-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
+/* Nästa spelare knapp */
+.next-btn {
+    width: 100%;
+    background: #27ae60;
+    color: white;
+    margin-top: 20px;
+    padding: 15px;
 }
 
-.button-grid button {
-    flex: 1;
-    min-width: 100px;
+.next-btn:hover {
+    background: #218c53;
 }
 
-/* Spelarlista i players.html */
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-ul li {
-    background: #333;
-    padding: 10px;
-    margin: 5px;
-    border-radius: 8px;
+/* Markerade val */
+.selected {
+    background: #ff9800 !important;
+    color: black !important;
 }
