@@ -37,16 +37,40 @@ function registerScore(points) {
     }
 
     let finalScore = points * multiplier;
+
+    // Double-In och Master-In regler
+    if (difficulty === "double-in" && !player.hasStarted) {
+        if (![2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 50].includes(finalScore)) {
+            alert("Du måste starta med en dubbel!");
+            return;
+        }
+        player.hasStarted = true;
+    }
+
+    if (difficulty === "master-in" && !player.hasStarted) {
+        if (![2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 50, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60].includes(finalScore)) {
+            alert("Du måste starta med en dubbel eller trippel!");
+            return;
+        }
+        player.hasStarted = true;
+    }
+
     let newScore = player.score - finalScore;
 
+    // Bust-regel
     if (newScore < 0 || newScore === 1) {
         alert("Bust! Din poäng återställs.");
         return nextPlayer();
     }
 
+    // Kontrollera avslutningsregel
     if (newScore === 0) {
         if (endRule === "double-out" && multiplier !== 2) {
             alert("Du måste avsluta med en dubbel!");
+            return;
+        }
+        if (endRule === "master-out" && multiplier < 2) {
+            alert("Du måste avsluta med en dubbel eller trippel!");
             return;
         }
         alert(player.name + " har vunnit spelet!");
@@ -66,9 +90,6 @@ function registerScore(points) {
 function nextPlayer() {
     currentPlayer = (currentPlayer + 1) % players.length;
     throws = [];
-    multiplier = 1;
-    document.querySelectorAll(".multiplier").forEach(button => button.classList.remove("selected"));
-    document.querySelector(".multiplier:first-child").classList.add("selected");
     renderGame();
 }
 
