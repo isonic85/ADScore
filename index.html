@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Dart Score</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Auto Dart Score App</h1>
+    
+    <!-- Video element för kamera -->
+    <video id="video" autoplay playsinline></video>
+    
+    <!-- Buttons for controlling the game -->
+    <button id="startBtn">Start Game</button>
+    <button id="stopBtn">Stop Game</button>
+    <button id="switchBtn">Switch Camera</button>
+
+    <!-- Score display -->
+    <div id="score">
+        <p>Player 1: <span id="player1Score">0</span></p>
+        <p>Player 2: <span id="player2Score">0</span></p>
+        <p id="gameMode">Game Mode: X01</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
