@@ -6,12 +6,12 @@ body {
     text-align: center;
     background: #121212;
     color: white;
-    margin: 20px;
+    margin: 0;
+    padding: 20px;
 }
 
-/* Huvudcontainer */
-.container {
-    max-width: 400px;
+.game-container {
+    max-width: 500px;
     margin: auto;
     background: #1e1e1e;
     padding: 20px;
@@ -19,67 +19,81 @@ body {
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
 }
 
-/* Rubriker */
-h1 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 20px;
+/* Poängtavla */
+.scoreboard {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
 }
 
-/* Knappar */
+.player {
+    flex: 1;
+    padding: 15px;
+    border-radius: 10px;
+    background: #333;
+    margin: 5px;
+}
+
+.player.active {
+    background: #f8c471;
+    color: black;
+}
+
+.score {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+/* Poänginmatning */
+.dart-grid {
+    margin-top: 20px;
+}
+
 button {
-    width: 100%;
     padding: 12px;
-    margin-top: 10px;
+    margin: 5px;
     font-size: 16px;
     font-weight: 600;
-    background: #007bff;
-    color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s;
 }
 
-button:hover {
-    background: #0056b3;
-}
-
-/* Inputs och dropdowns */
-.input-group input, select {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    font-size: 16px;
-    border: 2px solid #333;
-    border-radius: 8px;
-    background: #222;
+.miss {
+    background: #ff4c4c;
     color: white;
 }
 
-/* Spelarkort */
-.player-card {
-    background: #2a2a2a;
+.bull {
+    background: #f1c40f;
+    color: black;
+}
+
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.number-grid button {
+    background: #007bff;
+    color: white;
+}
+
+.number-grid button:hover {
+    background: #0056b3;
+}
+
+.next-btn {
+    width: 100%;
+    background: #27ae60;
+    color: white;
+    margin-top: 20px;
     padding: 15px;
-    margin: 10px 0;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
 }
 
-/* Poängtext */
-.player-card p {
-    font-size: 18px;
-    font-weight: 600;
-    color: #f8c471;
-}
-
-/* Poängknappar */
-.player-card button {
-    background: #f8c471;
-    color: #121212;
-    font-weight: bold;
-}
-
-.player-card button:hover {
-    background: #d68910;
+.next-btn:hover {
+    background: #218c53;
 }
