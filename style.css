@@ -80,6 +80,10 @@ button:active {
     color: black !important;
 }
 
+.player.active h2 {
+    color: black !important;
+}
+
 .score {
     font-size: 36px;
     font-weight: bold;
