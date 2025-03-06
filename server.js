@@ -1,5 +1,5 @@
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 8080 });
+const wss = new WebSocket.Server({ port: 8080 }); // WebSocket-servern lyssnar på port 8080
 
 let players = [];
 
@@ -7,7 +7,7 @@ wss.on('connection', (ws) => {
     console.log('A new player connected');
     players.push(ws);
 
-    // Skicka tillbaka anslutningen till den andra spelaren
+    // Skicka tillbaka meddelanden till den andra spelaren
     ws.on('message', (message) => {
         console.log(`Received message: ${message}`);
         // Skicka meddelandet till alla anslutna spelare
