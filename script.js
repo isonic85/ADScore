@@ -11,18 +11,21 @@ const difficulty = localStorage.getItem("gameDifficulty") || "straight-in";
 const endRule = localStorage.getItem("gameEndRule") || "double-out";
 
 function renderGame() {
-    document.getElementById("player1-name").textContent = players[0].name;
-    document.getElementById("player1-score").textContent = players[0].score;
-    document.getElementById("player2-name").textContent = players[1].name;
-    document.getElementById("player2-score").textContent = players[1].score;
+    const scoreboard = document.querySelector(".scoreboard");
+    scoreboard.innerHTML = "";
 
-    document.getElementById("throw1").textContent = throws[0] || "-";
-    document.getElementById("throw2").textContent = throws[1] || "-";
-    document.getElementById("throw3").textContent = throws[2] || "-";
+    players.forEach((player, index) => {
+        let playerDiv = document.createElement("div");
+        playerDiv.classList.add("player");
+        if (index === currentPlayer) playerDiv.classList.add("active");
+        playerDiv.innerHTML = `<h2>${player.name}</h2><p class="score">${player.score}</p>`;
+        scoreboard.appendChild(playerDiv);
+    });
+}
 
-    // Markerar aktuell spelare
-    document.getElementById("player1").classList.toggle("active", currentPlayer === 0);
-    document.getElementById("player2").classList.toggle("active", currentPlayer === 1);
+function rotatePlayers() {
+    currentPlayer = (currentPlayer + 1) % players.length;
+    renderGame();
 }
 
 function selectMultiplier(value) {
@@ -42,7 +45,7 @@ function registerScore(points) {
 
     if (throws.length >= 3) {
         alert("Du har kastat 3 gånger! Nästa spelare tur.");
-        return nextPlayer();
+        return rotatePlayers();
     }
 
     let finalScore = points * multiplier;
@@ -68,7 +71,7 @@ function registerScore(points) {
     if (newScore < 0 || newScore === 1) {
         alert("Bust! Poängen återställs.");
         player.score = roundStartScore; // Återställ till poängen vid rundans början
-        return nextPlayer();
+        return rotatePlayers();
     }
 
     if (newScore === 0) {
@@ -90,15 +93,8 @@ function registerScore(points) {
     renderGame();
 
     if (throws.length === 3) {
-        setTimeout(nextPlayer, 1000);
+        setTimeout(rotatePlayers, 1000);
     }
-}
-
-function nextPlayer() {
-    currentPlayer = (currentPlayer + 1) % players.length;
-    throws = [];
-    roundStartScore = players[currentPlayer].score; // Uppdatera startpoängen för nästa spelare
-    renderGame();
 }
 
 document.addEventListener("DOMContentLoaded", renderGame);
