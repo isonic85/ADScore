@@ -8,30 +8,14 @@
 </head>
 <body>
     <div class="container">
-        <h1>Dart Poängräknare</h1>
-
-        <!-- Välj kategori -->
-        <label for="category">Välj kategori:</label>
-        <select id="category" onchange="updateGameOptions()">
-            <option value="x01">X01</option>
-        </select>
-
-        <!-- Välj spel -->
-        <label for="game">Välj spel:</label>
-        <select id="game">
-            <option value="301">301</option>
-            <option value="501" selected>501</option>
-            <option value="701">701</option>
-        </select>
-
-        <!-- Lägg till spelare -->
-        <div class="input-group">
-            <input type="text" id="playerName" placeholder="Lägg till spelare">
-            <button onclick="addPlayer()">Lägg till</button>
-        </div>
-
-        <div id="players"></div>
+        <h1>Välj Spelkategori</h1>
+        <button onclick="selectGame('x01')">X01</button>
     </div>
-    <script src="script.js"></script>
+    <script>
+        function selectGame(category) {
+            localStorage.setItem("gameCategory", category);
+            window.location.href = "game.html";
+        }
+    </script>
 </body>
 </html>
