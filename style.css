@@ -49,6 +49,11 @@ h1, h2 {
     color: black;
 }
 
+/* Se till att spelarens namn syns vid aktiv spelare */
+.player.active h2 {
+    color: black !important;
+}
+
 .score {
     font-size: 36px;
     font-weight: bold;
@@ -104,6 +109,45 @@ h1, h2 {
     color: black;
 }
 
+/* Knappar */
+button {
+    background: #444;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+    width: auto;
+}
+
+/* Hover-effekt */
+button:hover {
+    background: #666;
+    transform: scale(1.05);
+}
+
+/* När en knapp trycks ned */
+button:active {
+    transform: scale(0.95);
+}
+
+/* Huvudknappar */
+.main-btn {
+    background: #f8c471;
+    color: black;
+    padding: 15px;
+    font-size: 18px;
+}
+
+/* Markerade val (spelval, svårighet, avslutsregel) */
+.selected {
+    background: #ff9800 !important;
+    color: black !important;
+}
+
 /* Nästa spelare-knapp */
 .next-btn {
     width: 100%;
@@ -115,10 +159,4 @@ h1, h2 {
 
 .next-btn:hover {
     background: #218c53;
-}
-
-/* Markerade val i game.html */
-.selected {
-    background: #ff9800 !important;
-    color: black !important;
 }
