@@ -23,6 +23,7 @@ function startGame() {
     player1Score = 301;
     player2Score = 301;
     updateScore();
+    currentThrowElem.textContent = `Player 1's turn`;
     startCamera();
 }
 
@@ -63,7 +64,7 @@ function switchCamera() {
     startCamera();
 }
 
-// Update the score
+// Update the score on the screen
 function updateScore() {
     player1ScoreElem.textContent = player1Score;
     player2ScoreElem.textContent = player2Score;
@@ -71,7 +72,7 @@ function updateScore() {
 
 // Simulate a dartboard hit
 function detectDartHit() {
-    // Simulate a random hit (in a real app, this would come from camera analysis)
+    // Simulate a random dart hit with points between 1 and 20
     let points = Math.floor(Math.random() * 20) + 1; // Random points between 1 and 20
     updatePoints(points);
 }
@@ -80,14 +81,14 @@ function detectDartHit() {
 function updatePoints(points) {
     if (currentPlayer === 1) {
         player1Score -= points;
-        currentPlayer = 2;
+        currentPlayer = 2;  // Switch to player 2
     } else {
         player2Score -= points;
-        currentPlayer = 1;
+        currentPlayer = 1;  // Switch to player 1
     }
     currentPointsElem.textContent = points;
     updateScore();
-    currentThrowElem.textContent = `Player ${currentPlayer}`;
+    currentThrowElem.textContent = `Player ${currentPlayer}'s turn`; // Show whose turn it is
 }
 
 // Simulate a round every 5 seconds for testing
