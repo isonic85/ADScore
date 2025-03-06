@@ -18,6 +18,10 @@ function renderGame() {
     document.getElementById("throw1").textContent = throws[0] || "-";
     document.getElementById("throw2").textContent = throws[1] || "-";
     document.getElementById("throw3").textContent = throws[2] || "-";
+
+    // Markerar aktuell spelare
+    document.getElementById("player1").classList.toggle("active", currentPlayer === 0);
+    document.getElementById("player2").classList.toggle("active", currentPlayer === 1);
 }
 
 function selectMultiplier(value) {
@@ -34,7 +38,7 @@ function registerScore(points) {
 
     if (throws.length >= 3) {
         alert("Du har kastat 3 gånger! Nästa spelare tur.");
-        return;
+        return nextPlayer();
     }
 
     let finalScore = points * multiplier;
@@ -89,7 +93,7 @@ function registerScore(points) {
 function nextPlayer() {
     currentPlayer = (currentPlayer + 1) % players.length;
     throws = [];
-    renderGame();
+    renderGame(); // 🟢 Uppdaterar spelaren korrekt!
 }
 
 document.addEventListener("DOMContentLoaded", renderGame);
