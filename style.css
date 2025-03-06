@@ -27,14 +27,15 @@ h1, h2 {
     color: #f8c471;
 }
 
-/* 🎯 Lobby (Hosta eller Joina) */
-#lobby {
+/* 🎯 Menyer */
+#welcomeMenu, #onlineLobby, #gameSettings, #matchInfo, #videoChat {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-bottom: 15px;
 }
 
+/* 🎯 Inputfält */
 input {
     padding: 10px;
     font-size: 16px;
