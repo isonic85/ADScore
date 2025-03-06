@@ -1,3 +1,4 @@
+/* Grundläggande stil för body */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -19,11 +20,11 @@ h1 {
 #video {
     position: relative;
     border: 2px solid #333;
-    width: 100%;
-    max-width: 640px;
-    max-height: 480px;
+    width: 100%; /* Fyll hela bredden */
+    max-width: 640px; /* Maximal bredd på videon */
+    max-height: 480px; /* Maximal höjd på videon */
     height: auto;
-    object-fit: contain;
+    object-fit: contain; /* Behåller förhållandet för video */
     margin-bottom: 20px;
 }
 
