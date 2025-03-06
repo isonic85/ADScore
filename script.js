@@ -71,3 +71,38 @@ function registerScore(points) {
         alert("Bust! Poängen återställs.");
         player.score = roundStartScore;
         return nextPlayer();
+    }
+
+    if (newScore === 0) {
+        if (endRule === "double-out" && multiplier !== 2) {
+            alert("Du måste avsluta med en dubbel!");
+            return;
+        }
+        if (endRule === "master-out" && multiplier < 2) {
+            alert("Du måste avsluta med en dubbel eller trippel!");
+            return;
+        }
+        alert(player.name + " har vunnit spelet!");
+        resetGame();
+        return;
+    }
+
+    player.score = newScore;
+    throws.push(finalScore);
+    renderGame();
+
+    if (throws.length === 3) {
+        setTimeout(nextPlayer, 1000);
+    }
+}
+
+// Växlar till nästa spelare
+function nextPlayer() {
+    currentPlayer = (currentPlayer + 1) % players.length;
+    throws = [];
+    roundStartScore = players[currentPlayer].score;
+    renderGame();
+}
+
+// Laddar spelets initiala tillstånd
+document.addEventListener("DOMContentLoaded", renderGame);
