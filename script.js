@@ -1,65 +1,30 @@
-let players = [];
-let gameScore = 501; // Standardstart för X01
+let players = JSON.parse(localStorage.getItem("players")) || [
+    { name: "Spelare 1", score: 301 },
+    { name: "Spelare 2", score: 301 }
+];
 
-// Uppdaterar vilka spel som finns tillgängliga beroende på kategori
-function updateGameOptions() {
-    let category = document.getElementById('category').value;
-    let gameSelect = document.getElementById('game');
+let currentPlayer = 0;
 
-    gameSelect.innerHTML = ''; // Rensa gamla val
+function renderGame() {
+    document.getElementById("player1-name").textContent = players[0].name;
+    document.getElementById("player1-score").textContent = players[0].score;
+    document.getElementById("player2-name").textContent = players[1].name;
+    document.getElementById("player2-score").textContent = players[1].score;
 
-    if (category === 'x01') {
-        let options = [301, 501, 701];
-        options.forEach(score => {
-            let option = document.createElement('option');
-            option.value = score;
-            option.textContent = score;
-            gameSelect.appendChild(option);
-        });
+    document.getElementById("player1").classList.toggle("active", currentPlayer === 0);
+    document.getElementById("player2").classList.toggle("active", currentPlayer === 1);
+}
+
+function registerScore(points) {
+    if (players[currentPlayer].score - points >= 0) {
+        players[currentPlayer].score -= points;
     }
-
-    gameScore = parseInt(gameSelect.value); // Uppdatera startpoängen
+    renderGame();
 }
 
-// Lägger till en spelare med vald startpoäng
-function addPlayer() {
-    let playerName = document.getElementById('playerName').value.trim();
-    gameScore = parseInt(document.getElementById('game').value); // Hämtar startpoäng från valt spel
-
-    if (playerName) {
-        players.push({ name: playerName, score: gameScore });
-        document.getElementById('playerName').value = '';
-        renderPlayers();
-    }
+function nextPlayer() {
+    currentPlayer = (currentPlayer + 1) % players.length;
+    renderGame();
 }
 
-// Uppdatera poäng
-function updateScore(index, points) {
-    if (players[index].score - points >= 0) {
-        players[index].score -= points;
-    }
-    renderPlayers();
-}
-
-// Rendera spelarna på skärmen
-function renderPlayers() {
-    let playersDiv = document.getElementById('players');
-    playersDiv.innerHTML = '';
-
-    players.forEach((player, index) => {
-        playersDiv.innerHTML += `
-            <div class="player-card">
-                <h3>${player.name}</h3>
-                <p>Poäng: ${player.score}</p>
-                <button onclick="updateScore(${index}, 20)">-20</button>
-                <button onclick="updateScore(${index}, 50)">-50</button>
-                <button onclick="updateScore(${index}, 100)">-100</button>
-            </div>
-        `;
-    });
-}
-
-// Initiera val vid start
-document.addEventListener("DOMContentLoaded", () => {
-    updateGameOptions();
-});
+document.addEventListener("DOMContentLoaded", renderGame);
