@@ -4,6 +4,7 @@ let players = JSON.parse(localStorage.getItem("players")) || [
 ];
 
 let currentPlayer = 0;
+let throws = [];
 
 function renderGame() {
     document.getElementById("player1-name").textContent = players[0].name;
@@ -13,17 +14,27 @@ function renderGame() {
 
     document.getElementById("player1").classList.toggle("active", currentPlayer === 0);
     document.getElementById("player2").classList.toggle("active", currentPlayer === 1);
+
+    document.getElementById("throw1").textContent = throws[0] || "-";
+    document.getElementById("throw2").textContent = throws[1] || "-";
+    document.getElementById("throw3").textContent = throws[2] || "-";
 }
 
 function registerScore(points) {
-    if (players[currentPlayer].score - points >= 0) {
+    if (throws.length < 3) {
         players[currentPlayer].score -= points;
+        throws.push(points);
+        renderGame();
+
+        if (throws.length === 3) {
+            setTimeout(nextPlayer, 1000);
+        }
     }
-    renderGame();
 }
 
 function nextPlayer() {
     currentPlayer = (currentPlayer + 1) % players.length;
+    throws = [];
     renderGame();
 }
 
