@@ -10,24 +10,24 @@
     <div class="game-container">
         <h1>Välj X01-variant</h1>
         <div class="button-grid">
-            <button class="main-btn" onclick="selectGame(301)">301</button>
-            <button class="main-btn" onclick="selectGame(501)">501</button>
-            <button class="main-btn" onclick="selectGame(701)">701</button>
-            <button class="main-btn" onclick="selectGame(1001)">1001</button>
+            <button class="main-btn" onclick="selectGame(301, this)">301</button>
+            <button class="main-btn" onclick="selectGame(501, this)">501</button>
+            <button class="main-btn" onclick="selectGame(701, this)">701</button>
+            <button class="main-btn" onclick="selectGame(1001, this)">1001</button>
         </div>
 
         <h2>Välj Svårighetsgrad</h2>
         <div class="button-grid">
-            <button class="main-btn" onclick="selectDifficulty('straight-in')">Straight-In</button>
-            <button class="main-btn" onclick="selectDifficulty('double-in')">Double-In</button>
-            <button class="main-btn" onclick="selectDifficulty('master-in')">Master-In</button>
+            <button class="main-btn" onclick="selectDifficulty('straight-in', this)">Straight-In</button>
+            <button class="main-btn" onclick="selectDifficulty('double-in', this)">Double-In</button>
+            <button class="main-btn" onclick="selectDifficulty('master-in', this)">Master-In</button>
         </div>
 
         <h2>Välj Avslutningsregel</h2>
         <div class="button-grid">
-            <button class="main-btn" onclick="selectEndRule('straight-out')">Straight-Out</button>
-            <button class="main-btn" onclick="selectEndRule('double-out')">Double-Out</button>
-            <button class="main-btn" onclick="selectEndRule('master-out')">Master-Out</button>
+            <button class="main-btn" onclick="selectEndRule('straight-out', this)">Straight-Out</button>
+            <button class="main-btn" onclick="selectEndRule('double-out', this)">Double-Out</button>
+            <button class="main-btn" onclick="selectEndRule('master-out', this)">Master-Out</button>
         </div>
 
         <button class="next-btn" onclick="startGame()">Starta Spelet</button>
@@ -38,19 +38,30 @@
         let selectedDifficulty = "straight-in";
         let selectedEndRule = "double-out";
 
-        function selectGame(game) {
+        function selectGame(game, element) {
             selectedGame = game;
             localStorage.setItem("gameScore", game);
+            highlightSelection(element, "button-grid");
         }
 
-        function selectDifficulty(difficulty) {
+        function selectDifficulty(difficulty, element) {
             selectedDifficulty = difficulty;
             localStorage.setItem("gameDifficulty", difficulty);
+            highlightSelection(element, "button-grid");
         }
 
-        function selectEndRule(rule) {
+        function selectEndRule(rule, element) {
             selectedEndRule = rule;
             localStorage.setItem("gameEndRule", rule);
+            highlightSelection(element, "button-grid");
+        }
+
+        function highlightSelection(selectedElement, parentClass) {
+            let buttons = selectedElement.parentElement.getElementsByTagName("button");
+            for (let btn of buttons) {
+                btn.classList.remove("selected");
+            }
+            selectedElement.classList.add("selected");
         }
 
         function startGame() {
