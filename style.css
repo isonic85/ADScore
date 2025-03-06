@@ -20,106 +20,57 @@ body {
 }
 
 /* Huvudrubrik */
-h1, h2 {
-    font-size: 22px;
+h1 {
+    font-size: 24px;
     font-weight: 600;
     margin-bottom: 15px;
 }
 
-/* Poängställning */
-.scoreboard {
-    display: flex;
-    justify-content: space-between;
+/* Dropdown-container */
+.dropdown-container {
+    margin: 15px 0;
+}
+
+.dropdown-container select {
+    width: 100%;
     padding: 10px;
-}
-
-.player {
-    flex: 1;
-    padding: 15px;
-    border-radius: 10px;
-    background: #333;
-    margin: 5px;
-    text-align: center;
-}
-
-.player.active {
-    background: #f8c471;
-    color: black;
-}
-
-.score {
-    font-size: 36px;
-    font-weight: bold;
-}
-
-/* Visar varje kast */
-.throw-tracker {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 10px 0;
-}
-
-.throw-box {
-    width: 50px;
-    height: 50px;
-    background: #444;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-}
-
-/* MISS & BULL-knappar på samma rad */
-.bull-row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-
-.bull-row button {
-    flex: 1;
-    margin: 5px;
-    padding: 12px;
-}
-
-.miss {
-    background: #ff4c4c;
-    color: white;
-}
-
-.bull {
-    background: #f1c40f;
-    color: black;
-}
-
-/* Poänginmatning i rutnät */
-.number-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
-    margin-top: 10px;
-}
-
-.number-grid button {
-    background: #007bff;
-    color: white;
-    padding: 12px;
     font-size: 16px;
-    font-weight: bold;
     border-radius: 8px;
     border: none;
+}
+
+/* Input-container */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+}
+
+.input-container button {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background: #27ae60;
+    color: white;
     cursor: pointer;
 }
 
-.number-grid button:hover {
-    background: #0056b3;
+.input-container button:hover {
+    background: #218c53;
 }
 
-/* Enkel, Dubbel, Trippel val (Nu under siffrorna, ovanför "Next Player") */
+/* Enkel, Dubbel, Trippel val (används nu också för Offline, Create, Join) */
 .multiplier-row {
     display: flex;
     justify-content: space-around;
@@ -149,21 +100,19 @@ h1, h2 {
     color: black;
 }
 
-/* Nästa spelare knapp */
+/* Nästa knapp */
 .next-btn {
     width: 100%;
     background: #27ae60;
     color: white;
     margin-top: 20px;
     padding: 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
 }
 
 .next-btn:hover {
     background: #218c53;
-}
-
-/* Markerade val */
-.selected {
-    background: #ff9800 !important;
-    color: black !important;
 }
