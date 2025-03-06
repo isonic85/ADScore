@@ -29,133 +29,62 @@ h1, h2 {
     color: #f8c471;
 }
 
-/* Knappar */
-button {
-    background: #444;
-    color: white;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.1s;
-}
-
-button:hover {
-    background: #666;
-    transform: scale(1.05);
-}
-
-button:active {
-    transform: scale(0.95);
-}
-
-.main-btn {
-    background: #f8c471;
-    color: black;
-}
-
-.main-btn:hover {
-    background: #e0ac5f;
-}
-
-/* Poängtavla med karuselleffekt */
+/* Poängtavla med roterande effekt */
 .scoreboard {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    overflow: hidden;
     position: relative;
     width: 100%;
-    height: 100px;
+    height: 120px;
+    overflow: hidden;
 }
 
-.scoreboard .player {
-    flex: 0 0 30%;
-    padding: 15px;
-    border-radius: 10px;
-    background: #333;
-    margin: 5px;
+.player {
+    position: absolute;
+    transition: transform 0.5s ease-in-out, opacity 0.5s;
+    width: 30%;
     text-align: center;
+    background: #333;
+    padding: 10px;
+    border-radius: 10px;
     color: white;
     opacity: 0.5;
     transform: scale(0.8);
-    transition: transform 0.5s, opacity 0.5s;
 }
 
-.scoreboard .player.active {
-    flex: 0 0 40%;
+.player.active {
+    width: 40%;
     background: #f8c471;
     color: black !important;
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateX(0);
+    z-index: 2;
 }
 
-.player.active h2 {
-    color: black !important;
+.player.previous {
+    transform: translateX(-100%) scale(0.7);
+    opacity: 0.5;
+    z-index: 1;
 }
 
-.score {
-    font-size: 36px;
-    font-weight: bold;
+.player.next {
+    transform: translateX(100%) scale(0.7);
+    opacity: 0.5;
+    z-index: 1;
 }
 
-/* Spelarlista i players.html */
-.input-group {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 15px;
+/* Animation när spelarna byts */
+.rotate-animation .player.active {
+    transform: scale(1) translateX(0);
 }
 
-input {
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    background: #444;
-    color: white;
-    font-size: 16px;
+.rotate-animation .player.previous {
+    transform: translateX(-150%) scale(0.6);
+    opacity: 0;
 }
 
-/* Välj spel och svårighetsgrad */
-.button-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.button-grid button {
-    flex: 1;
-    min-width: 100px;
-}
-
-/* Valda alternativ */
-.selected {
-    background: #ff9800 !important;
-    color: black !important;
-}
-
-/* Nästa spelare knapp */
-.next-btn {
-    width: 100%;
-    background: #27ae60;
-    color: white;
-    margin-top: 20px;
-    padding: 15px;
-}
-
-.next-btn:hover {
-    background: #218c53;
-}
-
-/* Återställ kastboxarnas rad-layout */
-.throw-tracker {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 10px 0;
+.rotate-animation .player.next {
+    transform: translateX(0) scale(1);
+    opacity: 1;
 }
