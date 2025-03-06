@@ -122,6 +122,36 @@ button {
     border-radius: 8px;
 }
 
+/* Enkel, Dubbel, Trippel val */
+.multiplier-row {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+
+.multiplier {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background: #444;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.multiplier:hover {
+    background: #666;
+}
+
+/* Markerad multiplikator */
+.multiplier.selected {
+    background: #ff9800;
+    color: black;
+}
+
 /* MISS & BULL-knappar på samma rad */
 .bull-row {
     display: flex;
