@@ -4,21 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auto Dart Score</title>
+
+    <!-- Lägg till TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Auto Dart Score App</h1>
-    
+
     <!-- Video element för kameran -->
     <video id="video" autoplay playsinline></video>
-    
+
     <!-- Buttons for controlling the game -->
     <div id="controls">
         <button id="startBtn">Start Game</button>
         <button id="stopBtn">Stop Game</button>
         <button id="switchBtn">Switch Camera</button>
     </div>
-    
+
     <!-- Score display -->
     <div id="score">
         <p>Player 1: <span id="player1Score">301</span></p>
