@@ -10,8 +10,8 @@ const configuration = {
     iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
 };
 
-// Signalering server (WebSocket server)
-const socket = new WebSocket('ws://localhost:8080');
+// Ersätt med din datorns offentliga IP-adress
+const socket = new WebSocket('ws://YOUR_PUBLIC_IP:8080'); // Ersätt med din offentliga IP-adress eller ngrok-URL
 
 // När vi ansluter till signaleringsservern
 socket.onopen = () => {
