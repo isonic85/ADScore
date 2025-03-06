@@ -6,13 +6,14 @@ let players = JSON.parse(localStorage.getItem("players")) || [
 let currentPlayer = 0;
 let throws = [];
 let multiplier = 1;
+let roundStartScore = players[currentPlayer].score; // Spara poängen vid rundans början
 const difficulty = localStorage.getItem("gameDifficulty") || "straight-in";
 const endRule = localStorage.getItem("gameEndRule") || "double-out";
 
 function renderGame() {
     document.getElementById("player1-name").textContent = players[0].name;
     document.getElementById("player1-score").textContent = players[0].score;
-    document.getElementById("player2-name").textContent = players[1].name;
+    document.getElementById("player2-name").textContent = players[1].score;
     document.getElementById("player2-score").textContent = players[1].score;
 
     document.getElementById("throw1").textContent = throws[0] || "-";
@@ -34,7 +35,10 @@ function selectMultiplier(value) {
 
 function registerScore(points) {
     let player = players[currentPlayer];
-    let previousScore = player.score; // Spara poängen innan kastet
+
+    if (throws.length === 0) {
+        roundStartScore = player.score; // Spara startpoängen vid första kastet
+    }
 
     if (throws.length >= 3) {
         alert("Du har kastat 3 gånger! Nästa spelare tur.");
@@ -63,7 +67,7 @@ function registerScore(points) {
 
     if (newScore < 0 || newScore === 1) {
         alert("Bust! Poängen återställs.");
-        player.score = previousScore; // Återställ till tidigare poäng
+        player.score = roundStartScore; // Återställ till poängen vid rundans början
         return nextPlayer();
     }
 
@@ -93,7 +97,8 @@ function registerScore(points) {
 function nextPlayer() {
     currentPlayer = (currentPlayer + 1) % players.length;
     throws = [];
-    renderGame(); // 🟢 Uppdaterar spelaren korrekt!
+    roundStartScore = players[currentPlayer].score; // Uppdatera startpoängen för nästa spelare
+    renderGame();
 }
 
 document.addEventListener("DOMContentLoaded", renderGame);
