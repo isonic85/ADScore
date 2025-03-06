@@ -8,6 +8,7 @@
 </head>
 <body>
     <div class="game-container">
+        <!-- Poängställning -->
         <div class="scoreboard">
             <div class="player active" id="player1">
                 <h2 id="player1-name">Spelare 1</h2>
@@ -19,33 +20,36 @@
             </div>
         </div>
 
-        <div class="dart-grid">
+        <!-- Miss & Bull-knappar -->
+        <div class="bull-row">
             <button class="miss" onclick="registerScore(0)">MISS</button>
             <button class="bull" onclick="registerScore(25)">BULL (25)</button>
             <button class="bull" onclick="registerScore(50)">BULL (50)</button>
+        </div>
 
-            <div class="number-grid">
-                <button onclick="registerScore(20)">20</button>
-                <button onclick="registerScore(19)">19</button>
-                <button onclick="registerScore(18)">18</button>
-                <button onclick="registerScore(17)">17</button>
-                <button onclick="registerScore(16)">16</button>
-                <button onclick="registerScore(15)">15</button>
-                <button onclick="registerScore(14)">14</button>
-                <button onclick="registerScore(13)">13</button>
-                <button onclick="registerScore(12)">12</button>
-                <button onclick="registerScore(11)">11</button>
-                <button onclick="registerScore(10)">10</button>
-                <button onclick="registerScore(9)">9</button>
-                <button onclick="registerScore(8)">8</button>
-                <button onclick="registerScore(7)">7</button>
-                <button onclick="registerScore(6)">6</button>
-                <button onclick="registerScore(5)">5</button>
-                <button onclick="registerScore(4)">4</button>
-                <button onclick="registerScore(3)">3</button>
-                <button onclick="registerScore(2)">2</button>
-                <button onclick="registerScore(1)">1</button>
-            </div>
+        <!-- Poänginmatning -->
+        <div class="number-grid">
+            <button onclick="registerScore(20)">20</button>
+            <button onclick="registerScore(19)">19</button>
+            <button onclick="registerScore(18)">18</button>
+            <button onclick="registerScore(17)">17</button>
+            <button onclick="registerScore(16)">16</button>
+            <button onclick="registerScore(15)">15</button>
+            <button onclick="registerScore(14)">14</button>
+            <button onclick="registerScore(13)">13</button>
+            <button onclick="registerScore(12)">12</button>
+            <button onclick="registerScore(11)">11</button>
+
+            <button onclick="registerScore(10)">10</button>
+            <button onclick="registerScore(9)">9</button>
+            <button onclick="registerScore(8)">8</button>
+            <button onclick="registerScore(7)">7</button>
+            <button onclick="registerScore(6)">6</button>
+            <button onclick="registerScore(5)">5</button>
+            <button onclick="registerScore(4)">4</button>
+            <button onclick="registerScore(3)">3</button>
+            <button onclick="registerScore(2)">2</button>
+            <button onclick="registerScore(1)">1</button>
         </div>
 
         <button class="next-btn" onclick="nextPlayer()">NEXT PLAYER</button>
