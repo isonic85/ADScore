@@ -27,70 +27,55 @@ h1, h2 {
     color: #f8c471;
 }
 
-/* Poängtavla med karuselleffekt */
+/* Poängställning */
 .scoreboard {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    height: 120px;
-    overflow: hidden;
+    justify-content: space-between;
+    padding: 10px;
 }
 
 .player {
-    position: absolute;
-    width: 30%;
+    flex: 1;
     padding: 15px;
     border-radius: 10px;
     background: #333;
+    margin: 5px;
     text-align: center;
     color: white;
-    opacity: 0.5;
-    transform: scale(0.8);
-    transition: transform 0.5s ease-in-out, opacity 0.5s;
 }
 
-/* Aktiv spelare - alltid i mitten */
 .player.active {
-    width: 40%;
     background: #f8c471;
-    color: black !important;
-    opacity: 1;
-    transform: scale(1);
-    z-index: 2;
+    color: black;
 }
 
-/* Föregående spelare - till vänster */
-.player.previous {
-    transform: translateX(-100%) scale(0.8);
-    opacity: 0.5;
-    z-index: 1;
+.score {
+    font-size: 36px;
+    font-weight: bold;
 }
 
-/* Nästa spelare - till höger */
-.player.next {
-    transform: translateX(100%) scale(0.8);
-    opacity: 0.5;
-    z-index: 1;
+/* Throw-tracker */
+.throw-tracker {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
 }
 
-/* Smidig övergång mellan spelare */
-.rotate-animation .player.active {
-    transform: translateX(0) scale(1);
+.throw-box {
+    width: 50px;
+    height: 50px;
+    background: #444;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
 }
 
-.rotate-animation .player.previous {
-    transform: translateX(-150%) scale(0.7);
-    opacity: 0;
-}
-
-.rotate-animation .player.next {
-    transform: translateX(0) scale(1);
-    opacity: 1;
-}
-
-/* Multiplikator-knappar (Enkel, Dubbel, Trippel) */
+/* Multiplikator-knappar */
 .multiplier-row {
     display: flex;
     justify-content: space-around;
@@ -119,28 +104,7 @@ h1, h2 {
     color: black;
 }
 
-/* Throw-boxar (för kast) */
-.throw-tracker {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 10px 0;
-}
-
-.throw-box {
-    width: 50px;
-    height: 50px;
-    background: #444;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-}
-
-/* Nästa spelare knapp */
+/* Nästa spelare-knapp */
 .next-btn {
     width: 100%;
     background: #27ae60;
