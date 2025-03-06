@@ -3,73 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dart Online</title>
+    <title>Dart Score App</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="game-container">
-        <h1>Välkommen till Dart</h1>
-
-        <!-- 🎯 Huvudmeny: Offline eller Online -->
-        <div id="mainMenu">
-            <button class="main-btn" id="playOffline">Spela Offline</button>
-            <button class="main-btn" id="playOnline">Spela Online</button>
-        </div>
-
-        <!-- 🎯 Offline-menyn (Samma som tidigare) -->
-        <div id="offlineMenu" class="hidden">
-            <h2>Välj Speltyp</h2>
-            <button class="game-option" data-game="301">301</button>
-            <button class="game-option" data-game="501">501</button>
-            <button class="game-option" data-game="701">701</button>
-            
-            <h2>Välj Svårighetsgrad</h2>
-            <button class="difficulty-option" data-difficulty="straight-in">Straight-In</button>
-            <button class="difficulty-option" data-difficulty="double-in">Double-In</button>
-            
-            <h2>Välj Avslutsregel</h2>
-            <button class="endrule-option" data-endrule="straight-out">Straight-Out</button>
-            <button class="endrule-option" data-endrule="double-out">Double-Out</button>
-
-            <button class="next-btn" id="startOfflineGame">Starta Offline</button>
-            <button class="main-btn" id="backToMainMenu">Tillbaka</button>
-        </div>
-
-        <!-- 🎯 Online-menyn (Hosta eller Joina) -->
-        <div id="onlineMenu" class="hidden">
-            <button class="main-btn" id="hostGame">Hosta ett spel</button>
-            <input type="text" id="joinCode" placeholder="Ange kod för att joina">
-            <button class="main-btn" id="joinGame">Joina</button>
-            <button class="main-btn" id="backToMainMenu2">Tillbaka</button>
-        </div>
-
-        <!-- 🎯 Spelval för host (Online) -->
-        <div id="gameSettings" class="hidden">
-            <h2>Välj Speltyp</h2>
-            <button class="game-option" data-game="301">301</button>
-            <button class="game-option" data-game="501">501</button>
-            <button class="game-option" data-game="701">701</button>
-            
-            <h2>Välj Svårighetsgrad</h2>
-            <button class="difficulty-option" data-difficulty="straight-in">Straight-In</button>
-            <button class="difficulty-option" data-difficulty="double-in">Double-In</button>
-            
-            <h2>Välj Avslutsregel</h2>
-            <button class="endrule-option" data-endrule="straight-out">Straight-Out</button>
-            <button class="endrule-option" data-endrule="double-out">Double-Out</button>
-
-            <button class="next-btn" id="startHosting">Skapa Match</button>
-            <button class="main-btn" id="backToOnlineMenu">Tillbaka</button>
-        </div>
-
-        <!-- 🎯 Matchkod och väntan på spelare -->
-        <div id="matchInfo" class="hidden">
-            <h2>Spelkod: <span id="gameCode"></span></h2>
-            <p id="playerStatus">Väntar på andra spelare...</p>
-            <button class="next-btn hidden" id="startGame">Starta Spelet</button>
-        </div>
+        <h1>Välkommen till Dart Score</h1>
+        <button class="main-btn" id="startGame">Välj Spel</button>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const startButton = document.getElementById("startGame");
+
+            if (startButton) {
+                startButton.addEventListener("click", function() {
+                    window.location.href = "game.html";
+                });
+            } else {
+                console.error("Startknappen kunde inte hittas.");
+            }
+        });
+    </script>
 </body>
 </html>
