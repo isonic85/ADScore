@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Pågående spel</h1>
+        <div id="gameArea"></div>
+    </div>
+    <script>
+        let players = JSON.parse(localStorage.getItem("players"));
+
+        function updateScore(index, points) {
+            players[index].score -= points;
+            if (players[index].score < 0) players[index].score += points; // Förhindra negativa poäng
+            renderGame();
+        }
+
+        function renderGame() {
+            let gameArea = document.getElementById("gameArea");
+            gameArea.innerHTML = "";
+
+            players.forEach((player, index) => {
+                let div = document.createElement("div");
+                div.className = "player-card";
+                div.innerHTML = `
+                    <h3>${player.name}</h3>
+                    <p>Poäng: ${player.score}</p>
+                    <button onclick="updateScore(${index}, 20)">-20</button>
+                    <button onclick="updateScore(${index}, 50)">-50</button>
+                    <button onclick="updateScore(${index}, 100)">-100</button>
+                `;
+                gameArea.appendChild(div);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", renderGame);
+    </script>
+</body>
+</html>

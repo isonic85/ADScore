@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Välj Spel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Välj Variant</h1>
+        <button onclick="selectVariant(301)">301</button>
+        <button onclick="selectVariant(501)">501</button>
+        <button onclick="selectVariant(701)">701</button>
+    </div>
+    <script>
+        function selectVariant(score) {
+            localStorage.setItem("gameScore", score);
+            window.location.href = "players.html";
+        }
+    </script>
+</body>
+</html>
