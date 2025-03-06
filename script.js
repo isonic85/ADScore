@@ -20,6 +20,9 @@ function renderGame() {
     document.getElementById("throw1").textContent = throws[0] || "-";
     document.getElementById("throw2").textContent = throws[1] || "-";
     document.getElementById("throw3").textContent = throws[2] || "-";
+
+    document.getElementById("player1").classList.toggle("active", currentPlayer === 0);
+    document.getElementById("player2").classList.toggle("active", currentPlayer === 1);
 }
 
 // Hanterar multiplikatorval
@@ -31,48 +34,40 @@ function selectMultiplier(value) {
     event.target.classList.add("selected");
 }
 
-// Roterar spelarna
-function rotatePlayers() {
-    document.querySelector(".scoreboard").classList.add("rotate-animation");
-
-    setTimeout(() => {
-        document.querySelector(".scoreboard").classList.remove("rotate-animation");
-
-        currentPlayer = (currentPlayer + 1) % players.length;
-        renderGame();
-    }, 500);
-}
-
-// Registrerar kast
+// Registrerar kast och beräknar poäng
 function registerScore(points) {
     let player = players[currentPlayer];
-    let finalScore = points * multiplier;
 
     if (throws.length === 0) {
         roundStartScore = player.score;
     }
 
     if (throws.length >= 3) {
-        return rotatePlayers();
+        alert("Du har kastat 3 gånger! Nästa spelare tur.");
+        return nextPlayer();
     }
 
-    if (player.score - finalScore < 0 || player.score - finalScore === 1) {
+    let finalScore = points * multiplier;
+
+    if (difficulty === "double-in" && !player.hasStarted) {
+        if (multiplier !== 2) {
+            alert("Du måste starta med en dubbel!");
+            return;
+        }
+        player.hasStarted = true;
+    }
+
+    if (difficulty === "master-in" && !player.hasStarted) {
+        if (multiplier < 2) {
+            alert("Du måste starta med en dubbel eller trippel!");
+            return;
+        }
+        player.hasStarted = true;
+    }
+
+    let newScore = player.score - finalScore;
+
+    if (newScore < 0 || newScore === 1) {
+        alert("Bust! Poängen återställs.");
         player.score = roundStartScore;
-        return rotatePlayers();
-    }
-
-    if (player.score - finalScore === 0 && multiplier >= 2) {
-        alert(player.name + " har vunnit spelet!");
-        return;
-    }
-
-    player.score -= finalScore;
-    throws.push(finalScore);
-    renderGame();
-
-    if (throws.length === 3) {
-        setTimeout(rotatePlayers, 1000);
-    }
-}
-
-document.addEventListener("DOMContentLoaded", renderGame);
+        return nextPlayer();
