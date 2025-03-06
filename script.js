@@ -5,7 +5,7 @@ let players = JSON.parse(localStorage.getItem("players")) || [
 
 let currentPlayer = 0;
 let throws = [];
-let multiplier = 1; // Standard: Enkel
+let multiplier = 1;
 const difficulty = localStorage.getItem("gameDifficulty") || "straight-in";
 const endRule = localStorage.getItem("gameEndRule") || "double-out";
 
@@ -38,9 +38,8 @@ function registerScore(points) {
 
     let finalScore = points * multiplier;
 
-    // Double-In och Master-In regler
     if (difficulty === "double-in" && !player.hasStarted) {
-        if (![2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 50].includes(finalScore)) {
+        if (multiplier !== 2) {
             alert("Du måste starta med en dubbel!");
             return;
         }
@@ -48,7 +47,7 @@ function registerScore(points) {
     }
 
     if (difficulty === "master-in" && !player.hasStarted) {
-        if (![2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 50, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60].includes(finalScore)) {
+        if (multiplier < 2) {
             alert("Du måste starta med en dubbel eller trippel!");
             return;
         }
@@ -57,13 +56,11 @@ function registerScore(points) {
 
     let newScore = player.score - finalScore;
 
-    // Bust-regel
     if (newScore < 0 || newScore === 1) {
         alert("Bust! Din poäng återställs.");
         return nextPlayer();
     }
 
-    // Kontrollera avslutningsregel
     if (newScore === 0) {
         if (endRule === "double-out" && multiplier !== 2) {
             alert("Du måste avsluta med en dubbel!");
