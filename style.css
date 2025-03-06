@@ -39,20 +39,20 @@ h1, h2 {
     display: none;
 }
 
-/* Endast aktiv spelare syns - MAXIMALT KOMPAKT DESIGN */
+/* Endast aktiv spelare syns */
 .player.active {
     display: block;
     background: #f8c471;
     color: black;
-    padding: 2px 5px; /* Minimalt med padding för en tajt box */
+    padding: 2px 5px; /* Mindre padding för tajtare box */
     border-radius: 4px;
     text-align: center;
     width: auto;
-    min-width: 120px; /* Smalare box */
-    max-width: 160px; /* Gör rutan riktigt kompakt */
+    min-width: 120px;
+    max-width: 160px;
 }
 
-/* Namnet är närmare poängen och mindre */
+/* Namnet är närmare poängen och centrerat */
 .player.active h2 {
     color: black !important;
     font-size: 16px; /* Gör namnet mindre */
@@ -65,14 +65,46 @@ h1, h2 {
     color: black !important;
     font-size: 44px; /* Stor poäng, men bättre proportioner */
     font-weight: bold;
-    line-height: 1; /* Gör att texten sitter tajtare */
+    line-height: 1; /* Tajtare layout */
+}
+
+/* 🎯 Uppdaterad upplyst ruta vid aktiv spelare 🎯 */
+.player-box {
+    background: #f8c471;
+    color: black;
+    padding: 5px 10px; /* Minskad padding för tightare höjd */
+    border-radius: 6px;
+    text-align: center;
+    width: auto;
+    min-width: 150px;
+    max-width: 200px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrerar både namn och poäng */
+    align-items: center;
+}
+
+/* Minskat mellanrum mellan namn och poäng */
+.player-box h2 {
+    font-size: 18px;
+    margin-bottom: 2px;
+    text-align: center;
+}
+
+/* Poäng är mer centrerad och framträdande */
+.player-box .score {
+    font-size: 42px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
 }
 
 /* Throw-tracker */
 .throw-tracker {
     display: flex;
     justify-content: center;
-    gap: 6px; /* Kompakt mellanrum */
+    gap: 6px;
     margin: 6px 0;
 }
 
