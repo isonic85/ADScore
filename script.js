@@ -13,7 +13,7 @@ const endRule = localStorage.getItem("gameEndRule") || "double-out";
 function renderGame() {
     document.getElementById("player1-name").textContent = players[0].name;
     document.getElementById("player1-score").textContent = players[0].score;
-    document.getElementById("player2-name").textContent = players[1].score;
+    document.getElementById("player2-name").textContent = players[1].name;
     document.getElementById("player2-score").textContent = players[1].score;
 
     document.getElementById("throw1").textContent = throws[0] || "-";
