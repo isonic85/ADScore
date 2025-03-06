@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="game-container">
         <h1>Lägg till Spelare</h1>
         <div class="input-group">
             <input type="text" id="playerName" placeholder="Spelarnamn">
-            <button onclick="addPlayer()">Lägg till</button>
+            <button class="main-btn" onclick="addPlayer()">Lägg till</button>
         </div>
         <ul id="playerList"></ul>
-        <button onclick="startGame()">Starta Spelet</button>
+        <button class="next-btn" onclick="startGame()">Starta Spelet</button>
     </div>
     <script>
         let players = [];
