@@ -14,28 +14,9 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-label {
-    font-weight: bold;
-    display: block;
-    margin-top: 10px;
-}
-
-.input-group, select {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    width: 100%;
-}
-
-select, input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
 button {
     padding: 10px;
+    margin: 5px;
     background: blue;
     color: white;
     border: none;
