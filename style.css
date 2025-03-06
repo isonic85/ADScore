@@ -11,10 +11,13 @@ h1 {
 }
 
 #video {
+    position: relative; /* Behåller videoelementet på samma ställe */
     border: 2px solid #333;
-    margin-top: 20px;
-    max-width: 100%;
-    height: auto;
+    width: 100%; /* Maximal bredd */
+    height: auto; /* Behåller förhållandet för höjd */
+    max-width: 640px; /* Max bredd så att den inte tar över skärmen */
+    max-height: 480px; /* Max höjd för att den inte ska vara för stor */
+    margin: 0 auto; /* Centrerar videon på skärmen */
 }
 
 button {
