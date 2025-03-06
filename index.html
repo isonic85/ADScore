@@ -29,9 +29,9 @@
 
         <!-- Spel-läge val (Offline, Create, Join) -->
         <div class="multiplier-row">
-            <button class="multiplier selected" onclick="selectGameMode('offline')">Offline</button>
-            <button class="multiplier" onclick="selectGameMode('create')">Create</button>
-            <button class="multiplier" onclick="selectGameMode('join')">Join</button>
+            <button class="multiplier selected" data-mode="offline" onclick="selectGameMode('offline')">Offline</button>
+            <button class="multiplier" data-mode="create" onclick="selectGameMode('create')">Create</button>
+            <button class="multiplier" data-mode="join" onclick="selectGameMode('join')">Join</button>
         </div>
 
         <!-- Knapp för att gå vidare och välja spelare -->
