@@ -65,8 +65,8 @@ h1, h2 {
 .throw-tracker {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin: 10px 0;
+    gap: 8px; /* Mindre mellanrum */
+    margin: 8px 0;
 }
 
 .throw-box {
@@ -86,21 +86,21 @@ h1, h2 {
 .multiplier-row {
     display: flex;
     justify-content: space-around;
-    margin: 15px 0;
+    margin: 12px 0;
 }
 
 .multiplier {
     flex: 1;
-    padding: 8px; /* Smalare ram */
-    font-size: 18px; /* Större text */
+    padding: 8px;
+    font-size: 18px;
     font-weight: bold;
     border: none;
-    border-radius: 6px; /* Smalare rundning */
+    border-radius: 6px;
     background: #444;
     color: white;
     cursor: pointer;
     transition: background 0.3s, transform 0.1s;
-    margin: 5px; /* Ger mer mellanrum */
+    margin: 4px; /* Mindre mellanrum */
 }
 
 .multiplier:hover {
@@ -116,15 +116,15 @@ h1, h2 {
 button {
     background: #444;
     color: white;
-    padding: 10px; /* Mindre padding för smalare knappar */
-    font-size: 18px; /* Större text */
+    padding: 10px;
+    font-size: 18px;
     font-weight: bold;
-    border-radius: 6px; /* Mindre rundning */
+    border-radius: 6px;
     border: none;
     cursor: pointer;
     transition: background 0.3s, transform 0.1s;
     width: auto;
-    margin: 6px; /* Ger luft mellan knappar */
+    margin: 4px; /* Mindre mellanrum */
 }
 
 /* Hover-effekt */
@@ -143,8 +143,8 @@ button:active {
     background: #f8c471;
     color: black;
     padding: 12px;
-    font-size: 20px; /* Gör huvudknappar extra tydliga */
-    margin: 8px;
+    font-size: 20px;
+    margin: 6px; /* Mindre mellanrum */
 }
 
 /* Markerade val (spelval, svårighet, avslutsregel) */
@@ -158,7 +158,7 @@ button:active {
     width: 100%;
     background: #27ae60;
     color: white;
-    margin-top: 15px;
+    margin-top: 12px;
     padding: 12px;
     font-size: 18px;
     border-radius: 6px;
