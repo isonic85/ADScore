@@ -27,31 +27,26 @@ h1, h2 {
     color: #f8c471;
 }
 
-/* Poängställning */
+/* Poängställning - endast aktiv spelare syns */
 .scoreboard {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding: 10px;
 }
 
+/* Gömmer alla spelare */
 .player {
-    flex: 1;
-    padding: 15px;
-    border-radius: 10px;
-    background: #333;
-    margin: 5px;
-    text-align: center;
-    color: white;
+    display: none;
 }
 
+/* Endast aktiv spelare syns */
 .player.active {
+    display: block;
     background: #f8c471;
     color: black;
-}
-
-/* Se till att spelarens namn syns vid aktiv spelare */
-.player.active h2 {
-    color: black !important;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
 }
 
 .score {
