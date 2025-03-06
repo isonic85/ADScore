@@ -6,7 +6,7 @@ let players = JSON.parse(localStorage.getItem("players")) || [
 let currentPlayer = 0;
 let throws = [];
 let multiplier = 1;
-let roundStartScore = players[currentPlayer].score; // Spara poängen vid rundans början
+let roundStartScore = players[currentPlayer].score;
 const difficulty = localStorage.getItem("gameDifficulty") || "straight-in";
 const endRule = localStorage.getItem("gameEndRule") || "double-out";
 
@@ -17,35 +17,38 @@ function renderGame() {
     players.forEach((player, index) => {
         let playerDiv = document.createElement("div");
         playerDiv.classList.add("player");
-        if (index === currentPlayer) playerDiv.classList.add("active");
+        if (index === currentPlayer) {
+            playerDiv.classList.add("active");
+        } else if (index === (currentPlayer - 1 + players.length) % players.length) {
+            playerDiv.classList.add("previous");
+        } else if (index === (currentPlayer + 1) % players.length) {
+            playerDiv.classList.add("next");
+        }
         playerDiv.innerHTML = `<h2>${player.name}</h2><p class="score">${player.score}</p>`;
         scoreboard.appendChild(playerDiv);
     });
 }
 
 function rotatePlayers() {
+    const playersList = document.querySelectorAll(".player");
+    playersList.forEach(player => {
+        player.style.transition = "transform 0.5s ease-in-out, opacity 0.5s";
+    });
+    
     currentPlayer = (currentPlayer + 1) % players.length;
     renderGame();
-}
-
-function selectMultiplier(value) {
-    multiplier = value;
-    document.querySelectorAll(".multiplier").forEach(button => {
-        button.classList.remove("selected");
-    });
-    event.target.classList.add("selected");
 }
 
 function registerScore(points) {
     let player = players[currentPlayer];
 
     if (throws.length === 0) {
-        roundStartScore = player.score; // Spara startpoängen vid första kastet
+        roundStartScore = player.score;
     }
 
     if (throws.length >= 3) {
         alert("Du har kastat 3 gånger! Nästa spelare tur.");
-        return rotatePlayers();
+        return setTimeout(rotatePlayers, 500);
     }
 
     let finalScore = points * multiplier;
@@ -70,8 +73,8 @@ function registerScore(points) {
 
     if (newScore < 0 || newScore === 1) {
         alert("Bust! Poängen återställs.");
-        player.score = roundStartScore; // Återställ till poängen vid rundans början
-        return rotatePlayers();
+        player.score = roundStartScore;
+        return setTimeout(rotatePlayers, 500);
     }
 
     if (newScore === 0) {
