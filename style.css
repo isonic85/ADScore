@@ -19,7 +19,7 @@ body {
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
 }
 
-/* Poängtavla */
+/* Poängställning i en rad */
 .scoreboard {
     display: flex;
     justify-content: space-between;
@@ -32,6 +32,7 @@ body {
     border-radius: 10px;
     background: #333;
     margin: 5px;
+    text-align: center;
 }
 
 .player.active {
@@ -44,20 +45,17 @@ body {
     font-weight: bold;
 }
 
-/* Poänginmatning */
-.dart-grid {
-    margin-top: 20px;
+/* MISS & BULL-knappar på samma rad */
+.bull-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
-button {
-    padding: 12px;
+.bull-row button {
+    flex: 1;
     margin: 5px;
-    font-size: 16px;
-    font-weight: 600;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s;
+    padding: 12px;
 }
 
 .miss {
@@ -70,6 +68,7 @@ button {
     color: black;
 }
 
+/* Poänginmatning som ett rutnät */
 .number-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -80,12 +79,19 @@ button {
 .number-grid button {
     background: #007bff;
     color: white;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
 }
 
 .number-grid button:hover {
     background: #0056b3;
 }
 
+/* Nästa spelare knapp */
 .next-btn {
     width: 100%;
     background: #27ae60;
