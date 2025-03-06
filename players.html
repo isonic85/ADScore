@@ -9,10 +9,39 @@
 <body>
     <div class="game-container">
         <h1>Lägg till Spelare</h1>
-        <input type="text" id="playerName" placeholder="Spelarnamn">
-        <button class="main-btn" onclick="addPlayer()">Lägg till</button>
+        <div class="input-group">
+            <input type="text" id="playerName" placeholder="Spelarnamn">
+            <button class="main-btn" onclick="addPlayer()">Lägg till</button>
+        </div>
         <ul id="playerList"></ul>
         <button class="next-btn" onclick="startGame()">Starta Spelet</button>
     </div>
+    <script>
+        let players = [];
+
+        function addPlayer() {
+            let playerName = document.getElementById("playerName").value.trim();
+            if (playerName) {
+                players.push({ name: playerName, score: localStorage.getItem("gameScore") });
+                document.getElementById("playerName").value = "";
+                renderPlayers();
+            }
+        }
+
+        function renderPlayers() {
+            let list = document.getElementById("playerList");
+            list.innerHTML = "";
+            players.forEach(player => {
+                let li = document.createElement("li");
+                li.textContent = player.name;
+                list.appendChild(li);
+            });
+        }
+
+        function startGame() {
+            localStorage.setItem("players", JSON.stringify(players));
+            window.location.href = "play.html";
+        }
+    </script>
 </body>
 </html>
