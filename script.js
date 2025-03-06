@@ -6,7 +6,7 @@ let players = JSON.parse(localStorage.getItem("players")) || [
 let currentPlayer = 0;
 let throws = [];
 let multiplier = 1;
-let roundStartScore = players[currentPlayer].score; 
+let roundStartScore = players[currentPlayer].score;
 const difficulty = localStorage.getItem("gameDifficulty") || "straight-in";
 const endRule = localStorage.getItem("gameEndRule") || "double-out";
 
@@ -20,10 +20,6 @@ function renderGame() {
     document.getElementById("throw1").textContent = throws[0] || "-";
     document.getElementById("throw2").textContent = throws[1] || "-";
     document.getElementById("throw3").textContent = throws[2] || "-";
-
-    // Markerar aktiv spelare
-    document.getElementById("player1").classList.toggle("active", currentPlayer === 0);
-    document.getElementById("player2").classList.toggle("active", currentPlayer === 1);
 }
 
 // Hanterar multiplikatorval
@@ -35,114 +31,48 @@ function selectMultiplier(value) {
     event.target.classList.add("selected");
 }
 
-// Registrerar kast och beräknar poäng
+// Roterar spelarna
+function rotatePlayers() {
+    document.querySelector(".scoreboard").classList.add("rotate-animation");
+
+    setTimeout(() => {
+        document.querySelector(".scoreboard").classList.remove("rotate-animation");
+
+        currentPlayer = (currentPlayer + 1) % players.length;
+        renderGame();
+    }, 500);
+}
+
+// Registrerar kast
 function registerScore(points) {
     let player = players[currentPlayer];
+    let finalScore = points * multiplier;
 
     if (throws.length === 0) {
         roundStartScore = player.score;
     }
 
     if (throws.length >= 3) {
-        alert("Du har kastat 3 gånger! Nästa spelare tur.");
-        return nextPlayer();
+        return rotatePlayers();
     }
 
-    let finalScore = points * multiplier;
-
-    if (difficulty === "double-in" && !player.hasStarted) {
-        if (multiplier !== 2) {
-            alert("Du måste starta med en dubbel!");
-            return;
-        }
-        player.hasStarted = true;
-    }
-
-    if (difficulty === "master-in" && !player.hasStarted) {
-        if (multiplier < 2) {
-            alert("Du måste starta med en dubbel eller trippel!");
-            return;
-        }
-        player.hasStarted = true;
-    }
-
-    let newScore = player.score - finalScore;
-
-    if (newScore < 0 || newScore === 1) {
-        alert("Bust! Poängen återställs.");
+    if (player.score - finalScore < 0 || player.score - finalScore === 1) {
         player.score = roundStartScore;
-        return nextPlayer();
+        return rotatePlayers();
     }
 
-    if (newScore === 0) {
-        if (endRule === "double-out" && multiplier !== 2) {
-            alert("Du måste avsluta med en dubbel!");
-            return;
-        }
-        if (endRule === "master-out" && multiplier < 2) {
-            alert("Du måste avsluta med en dubbel eller trippel!");
-            return;
-        }
+    if (player.score - finalScore === 0 && multiplier >= 2) {
         alert(player.name + " har vunnit spelet!");
-        resetGame();
         return;
     }
 
-    player.score = newScore;
+    player.score -= finalScore;
     throws.push(finalScore);
     renderGame();
 
     if (throws.length === 3) {
-        setTimeout(nextPlayer, 1000);
+        setTimeout(rotatePlayers, 1000);
     }
 }
 
-// Byter till nästa spelare
-function nextPlayer() {
-    currentPlayer = (currentPlayer + 1) % players.length;
-    throws = [];
-    roundStartScore = players[currentPlayer].score;
-    renderGame();
-}
-
-// Markerar val i game.html
-function highlightSelection(selectedElement, parentId) {
-    let buttons = document.getElementById(parentId).getElementsByTagName("button");
-    for (let btn of buttons) {
-        btn.classList.remove("selected");
-    }
-    selectedElement.classList.add("selected");
-}
-
-// Laddar in game.html-val från localStorage
-document.addEventListener("DOMContentLoaded", function() {
-    renderGame();
-
-    let savedGame = localStorage.getItem("gameScore");
-    let savedDifficulty = localStorage.getItem("gameDifficulty");
-    let savedEndRule = localStorage.getItem("gameEndRule");
-
-    if (savedGame) {
-        document.querySelectorAll("#game-options button").forEach(btn => {
-            if (btn.textContent === savedGame) {
-                btn.classList.add("selected");
-            }
-        });
-    }
-
-    if (savedDifficulty) {
-        document.querySelectorAll("#difficulty-options button").forEach(btn => {
-            if (btn.dataset.value === savedDifficulty) {
-                btn.classList.add("selected");
-            }
-        });
-    }
-
-    if (savedEndRule) {
-        document.querySelectorAll("#endrule-options button").forEach(btn => {
-            if (btn.dataset.value === savedEndRule) {
-                btn.classList.add("selected");
-            }
-        });
-    }
-});
+document.addEventListener("DOMContentLoaded", renderGame);
