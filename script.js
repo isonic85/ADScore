@@ -105,10 +105,10 @@ async function detectDartThrow() {
 function updatePoints(points) {
     if (currentPlayer === 1) {
         player1Score -= points;
-        currentPlayer = 2; // Switch to player 2
+        currentPlayer = 2;  // Switch to player 2
     } else {
         player2Score -= points;
-        currentPlayer = 1; // Switch to player 1
+        currentPlayer = 1;  // Switch to player 1
     }
 
     currentPointsElem.textContent = points;
