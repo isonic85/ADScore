@@ -27,7 +27,14 @@
             <div class="throw-box" id="throw3">-</div>
         </div>
 
-        <!-- Miss & Bull-knappar -->
+        <!-- Enkel/Dubbel/Trippel val -->
+        <div class="multiplier-row">
+            <button class="multiplier selected" onclick="selectMultiplier(1)">Enkel</button>
+            <button class="multiplier" onclick="selectMultiplier(2)">Dubbel</button>
+            <button class="multiplier" onclick="selectMultiplier(3)">Trippel</button>
+        </div>
+
+        <!-- MISS & BULL-knappar -->
         <div class="bull-row">
             <button class="miss" onclick="registerScore(0)">MISS</button>
             <button class="bull" onclick="registerScore(25)">BULL (25)</button>
@@ -36,27 +43,27 @@
 
         <!-- Poänginmatning i rutnät -->
         <div class="number-grid">
-            <button onclick="registerScore(20)">20</button>
-            <button onclick="registerScore(19)">19</button>
-            <button onclick="registerScore(18)">18</button>
-            <button onclick="registerScore(17)">17</button>
-            <button onclick="registerScore(16)">16</button>
-            <button onclick="registerScore(15)">15</button>
-            <button onclick="registerScore(14)">14</button>
-            <button onclick="registerScore(13)">13</button>
-            <button onclick="registerScore(12)">12</button>
-            <button onclick="registerScore(11)">11</button>
-
-            <button onclick="registerScore(10)">10</button>
-            <button onclick="registerScore(9)">9</button>
-            <button onclick="registerScore(8)">8</button>
-            <button onclick="registerScore(7)">7</button>
-            <button onclick="registerScore(6)">6</button>
-            <button onclick="registerScore(5)">5</button>
-            <button onclick="registerScore(4)">4</button>
-            <button onclick="registerScore(3)">3</button>
-            <button onclick="registerScore(2)">2</button>
             <button onclick="registerScore(1)">1</button>
+            <button onclick="registerScore(2)">2</button>
+            <button onclick="registerScore(3)">3</button>
+            <button onclick="registerScore(4)">4</button>
+            <button onclick="registerScore(5)">5</button>
+            <button onclick="registerScore(6)">6</button>
+            <button onclick="registerScore(7)">7</button>
+            <button onclick="registerScore(8)">8</button>
+            <button onclick="registerScore(9)">9</button>
+            <button onclick="registerScore(10)">10</button>
+
+            <button onclick="registerScore(11)">11</button>
+            <button onclick="registerScore(12)">12</button>
+            <button onclick="registerScore(13)">13</button>
+            <button onclick="registerScore(14)">14</button>
+            <button onclick="registerScore(15)">15</button>
+            <button onclick="registerScore(16)">16</button>
+            <button onclick="registerScore(17)">17</button>
+            <button onclick="registerScore(18)">18</button>
+            <button onclick="registerScore(19)">19</button>
+            <button onclick="registerScore(20)">20</button>
         </div>
 
         <button class="next-btn" onclick="nextPlayer()">NEXT PLAYER</button>
