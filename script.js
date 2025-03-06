@@ -1,123 +1,100 @@
-const video = document.getElementById("video");
-const startBtn = document.getElementById("startBtn");
-const stopBtn = document.getElementById("stopBtn");
-const switchBtn = document.getElementById("switchBtn");
+const startBtn = document.getElementById('startBtn');
+const player1ScoreInput = document.getElementById('player1Score');
+const player2ScoreInput = document.getElementById('player2Score');
+const player1Video = document.getElementById('player1Video');
+const player2Video = document.getElementById('player2Video');
 
-const player1ScoreElem = document.getElementById("player1Score");
-const player2ScoreElem = document.getElementById("player2Score");
-const currentThrowElem = document.getElementById("currentThrow");
-const currentPointsElem = document.getElementById("currentPoints");
+let localStream;
+let peerConnection;
+const configuration = {
+    iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+};
 
-let stream;
-let currentDevice = "user"; // Start with front camera
-let player1Score = 301;
-let player2Score = 301;
-let currentPlayer = 1;
-let model;
+// Signalering server (WebSocket server)
+const socket = new WebSocket('ws://localhost:8080');
 
-startBtn.addEventListener("click", startGame);
-stopBtn.addEventListener("click", stopGame);
-switchBtn.addEventListener("click", switchCamera);
+// När vi ansluter till signaleringsservern
+socket.onopen = () => {
+    console.log('Connected to the signaling server');
+};
 
-// Start the game
-function startGame() {
-    player1Score = 301;
-    player2Score = 301;
-    updateScore();
-    currentThrowElem.textContent = `Player 1's turn`;
-    startCamera();
-    loadModel();
+// När vi tar emot ett meddelande från servern
+socket.onmessage = async (message) => {
+    const data = JSON.parse(message.data);
+    
+    if (data.offer) {
+        await handleOffer(data.offer);
+    } else if (data.answer) {
+        await handleAnswer(data.answer);
+    } else if (data.iceCandidate) {
+        await handleIceCandidate(data.iceCandidate);
+    }
+};
+
+// Starta spelet och skapa en WebRTC-anslutning
+startBtn.addEventListener('click', async () => {
+    await startGame();
+    await startLocalVideo();
+    await createPeerConnection();
+});
+
+// Starta lokala kameran
+async function startLocalVideo() {
+    localStream = await navigator.mediaDevices.getUserMedia({ video: true });
+    player1Video.srcObject = localStream;
 }
 
-// Stop the game
-function stopGame() {
-    stopCamera();
+// Skapa peer-to-peer WebRTC-anslutning
+async function createPeerConnection() {
+    peerConnection = new RTCPeerConnection(configuration);
+    
+    // Lägg till den lokala videoströmmen till anslutningen
+    localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+
+    // Ta emot den andra spelarens video
+    peerConnection.ontrack = (event) => {
+        player2Video.srcObject = event.streams[0];
+    };
+
+    // Skicka en offer till den andra spelaren
+    const offer = await peerConnection.createOffer();
+    await peerConnection.setLocalDescription(offer);
+
+    // Skicka offer till servern
+    socket.send(JSON.stringify({ offer }));
 }
 
-// Load TensorFlow.js model for dart detection
-async function loadModel() {
+// Hantera erbjudandet från den andra spelaren
+async function handleOffer(offer) {
+    await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
+
+    const answer = await peerConnection.createAnswer();
+    await peerConnection.setLocalDescription(answer);
+
+    // Skicka svar tillbaka till den andra spelaren
+    socket.send(JSON.stringify({ answer }));
+}
+
+// Hantera svaret från den andra spelaren
+async function handleAnswer(answer) {
+    await peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
+}
+
+// Hantera ICE-kandidater
+async function handleIceCandidate(iceCandidate) {
     try {
-        model = await cocoSsd.load(); // Load pre-trained model
-        console.log("Model loaded!");
-        detectDartThrow();
+        await peerConnection.addIceCandidate(new RTCIceCandidate(iceCandidate));
     } catch (error) {
-        console.error("Error loading model:", error);
+        console.error('Error adding received ICE candidate', error);
     }
 }
 
-// Start the camera
-function startCamera() {
-    if (stream) stopCamera();  // Stop the current camera stream
+// När poäng matas in, uppdatera spelets poäng
+player1ScoreInput.addEventListener('input', () => {
+    // Här kan vi lägga till logik för att uppdatera poäng i realtid om så önskas
+    console.log('Player 1 score:', player1ScoreInput.value);
+});
 
-    navigator.mediaDevices.getUserMedia({ video: { facingMode: currentDevice } })
-        .then((newStream) => {
-            video.srcObject = newStream;
-            stream = newStream;
-        })
-        .catch((err) => {
-            console.log("Error accessing camera: ", err);
-            alert("Camera access denied. Please allow the camera in your browser settings.");
-        });
-}
-
-// Stop the camera
-function stopCamera() {
-    if (stream) {
-        let tracks = stream.getTracks();
-        tracks.forEach(track => track.stop());
-        video.srcObject = null;
-        stream = null;
-    }
-}
-
-// Switch between front and back camera
-function switchCamera() {
-    currentDevice = currentDevice === "user" ? "environment" : "user";
-    stopCamera();
-    startCamera();
-}
-
-// Update the score on the screen
-function updateScore() {
-    player1ScoreElem.textContent = player1Score;
-    player2ScoreElem.textContent = player2Score;
-}
-
-// Detect dart throw and calculate points
-async function detectDartThrow() {
-    if (!model) {
-        console.log("Model not loaded yet!");
-        return;
-    }
-
-    const predictions = await model.detect(video); // Make prediction on the video feed
-    console.log("Predictions:", predictions);
-
-    // Simulate dart detection based on object detection model
-    const dartHit = predictions.find(p => p.class === 'dart'); // Look for 'dart' class in predictions
-
-    if (dartHit) {
-        console.log("Dart hit detected:", dartHit);
-        // Simulate assigning points based on where dart hit the board
-        let points = Math.floor(Math.random() * 20) + 1; // Random points for testing
-        updatePoints(points);
-    }
-
-    // Call the detection function again after 100 milliseconds
-    setTimeout(detectDartThrow, 100);
-}
-
-// Update points for the player based on dart hit
-function updatePoints(points) {
-    if (currentPlayer === 1) {
-        player1Score -= points;
-        currentPlayer = 2;  // Switch to player 2
-    } else {
-        player2Score -= points;
-        currentPlayer = 1;  // Switch to player 1
-    }
-
-    currentPointsElem.textContent = points;
-    updateScore();
-    currentThrowElem.textContent = `Player ${currentPlayer}'s turn`;
-}
+player2ScoreInput.addEventListener('input', () => {
+    console.log('Player 2 score:', player2ScoreInput.value);
+});
