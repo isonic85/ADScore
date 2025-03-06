@@ -8,18 +8,58 @@
 </head>
 <body>
     <div class="game-container">
-        <h1>Välj Variant</h1>
+        <h1>Välj X01-variant</h1>
         <div class="button-grid">
-            <button class="main-btn" onclick="selectVariant(301)">301</button>
-            <button class="main-btn" onclick="selectVariant(501)">501</button>
-            <button class="main-btn" onclick="selectVariant(701)">701</button>
+            <button class="main-btn" onclick="selectGame(301)">301</button>
+            <button class="main-btn" onclick="selectGame(501)">501</button>
+            <button class="main-btn" onclick="selectGame(701)">701</button>
+            <button class="main-btn" onclick="selectGame(1001)">1001</button>
         </div>
+
+        <h2>Välj Svårighetsgrad</h2>
+        <div class="button-grid">
+            <button class="main-btn" onclick="selectDifficulty('straight-in')">Straight-In</button>
+            <button class="main-btn" onclick="selectDifficulty('double-in')">Double-In</button>
+            <button class="main-btn" onclick="selectDifficulty('master-in')">Master-In</button>
+        </div>
+
+        <h2>Välj Avslutningsregel</h2>
+        <div class="button-grid">
+            <button class="main-btn" onclick="selectEndRule('straight-out')">Straight-Out</button>
+            <button class="main-btn" onclick="selectEndRule('double-out')">Double-Out</button>
+            <button class="main-btn" onclick="selectEndRule('master-out')">Master-Out</button>
+        </div>
+
+        <button class="next-btn" onclick="startGame()">Starta Spelet</button>
     </div>
+
     <script>
-        function selectVariant(score) {
-            if (!score) return; // Säkerhetsskydd om ingen poäng är vald
-            localStorage.setItem("gameScore", score);
-            window.location.href = "players.html"; // Se till att filen finns
+        let selectedGame = null;
+        let selectedDifficulty = "straight-in";
+        let selectedEndRule = "double-out";
+
+        function selectGame(game) {
+            selectedGame = game;
+            localStorage.setItem("gameScore", game);
+        }
+
+        function selectDifficulty(difficulty) {
+            selectedDifficulty = difficulty;
+            localStorage.setItem("gameDifficulty", difficulty);
+        }
+
+        function selectEndRule(rule) {
+            selectedEndRule = rule;
+            localStorage.setItem("gameEndRule", rule);
+        }
+
+        function startGame() {
+            if (!selectedGame) {
+                alert("Välj en X01-variant innan du startar spelet.");
+                return;
+            }
+            localStorage.setItem("players", JSON.stringify([]));
+            window.location.href = "players.html";
         }
     </script>
 </body>
