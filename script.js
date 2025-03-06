@@ -21,7 +21,7 @@ socket.onopen = () => {
 // När vi tar emot ett meddelande från servern
 socket.onmessage = async (message) => {
     const data = JSON.parse(message.data);
-    
+
     if (data.offer) {
         await handleOffer(data.offer);
     } else if (data.answer) {
@@ -91,7 +91,6 @@ async function handleIceCandidate(iceCandidate) {
 
 // När poäng matas in, uppdatera spelets poäng
 player1ScoreInput.addEventListener('input', () => {
-    // Här kan vi lägga till logik för att uppdatera poäng i realtid om så önskas
     console.log('Player 1 score:', player1ScoreInput.value);
 });
 
