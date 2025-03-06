@@ -30,6 +30,7 @@ function selectMultiplier(value) {
 
 function registerScore(points) {
     let player = players[currentPlayer];
+    let previousScore = player.score; // Spara poängen innan kastet
 
     if (throws.length >= 3) {
         alert("Du har kastat 3 gånger! Nästa spelare tur.");
@@ -57,7 +58,8 @@ function registerScore(points) {
     let newScore = player.score - finalScore;
 
     if (newScore < 0 || newScore === 1) {
-        alert("Bust! Din poäng återställs.");
+        alert("Bust! Poängen återställs.");
+        player.score = previousScore; // Återställ till tidigare poäng
         return nextPlayer();
     }
 
