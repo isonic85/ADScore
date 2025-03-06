@@ -56,10 +56,6 @@ function registerScore(points) {
             alert("Du måste avsluta med en dubbel!");
             return;
         }
-        if (endRule === "master-out" && ![2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 50, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60].includes(points)) {
-            alert("Du måste avsluta med en dubbel eller trippel!");
-            return;
-        }
         alert(player.name + " har vunnit spelet!");
         resetGame();
         return;
@@ -73,12 +69,6 @@ function registerScore(points) {
     if (throws.length === 3) {
         setTimeout(nextPlayer, 1000);
     }
-}
-
-function nextPlayer() {
-    currentPlayer = (currentPlayer + 1) % players.length;
-    throws = [];
-    renderGame();
 }
 
 document.addEventListener("DOMContentLoaded", renderGame);
