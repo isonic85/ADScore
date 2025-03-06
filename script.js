@@ -1,12 +1,12 @@
 let players = JSON.parse(localStorage.getItem("players")) || [
-    { name: "Spelare 1", score: 301, hasStarted: false },
-    { name: "Spelare 2", score: 301, hasStarted: false }
+    { name: "Spelare 1", score: parseInt(localStorage.getItem("gameScore")), hasStarted: false },
+    { name: "Spelare 2", score: parseInt(localStorage.getItem("gameScore")), hasStarted: false }
 ];
 
 let currentPlayer = 0;
 let throws = [];
-const doubleOut = true; // Krav på dubbel för att avsluta spelet
-const doubleIn = false; // Krav på dubbel för att börja spelet (kan sättas till true)
+const difficulty = localStorage.getItem("gameDifficulty") || "straight-in";
+const endRule = localStorage.getItem("gameEndRule") || "double-out";
 
 function renderGame() {
     document.getElementById("player1-name").textContent = players[0].name;
@@ -25,8 +25,8 @@ function renderGame() {
 function registerScore(points) {
     let player = players[currentPlayer];
 
-    // Om Double-In är aktivt och spelaren ännu inte startat
-    if (doubleIn && !player.hasStarted) {
+    // Double-In och Master-In
+    if (difficulty === "double-in" && !player.hasStarted) {
         if (![2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 50].includes(points)) {
             alert("Du måste starta med en dubbel!");
             return;
@@ -34,20 +34,30 @@ function registerScore(points) {
         player.hasStarted = true;
     }
 
-    let newScore = player.score - points;
-
-    // Bust-regel: Om spelaren går över eller hamnar på 1, återställs poängen
-    if (newScore < 0 || newScore === 1) {
-        alert("Bust! Din poäng återställs.");
-        newScore = player.score; // Återställ till ursprunglig poäng för rundan
-        nextPlayer();
-        return;
+    if (difficulty === "master-in" && !player.hasStarted) {
+        if (![2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 50, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60].includes(points)) {
+            alert("Du måste starta med en dubbel eller trippel!");
+            return;
+        }
+        player.hasStarted = true;
     }
 
-    // Double-Out-regel: Om spelet ska avslutas måste sista kastet vara en dubbel
-    if (doubleOut && newScore === 0) {
-        if (![2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 50].includes(points)) {
+    let newScore = player.score - points;
+
+    // Bust-regel
+    if (newScore < 0 || newScore === 1) {
+        alert("Bust! Din poäng återställs.");
+        return nextPlayer();
+    }
+
+    // Kontrollera Double-Out eller Master-Out
+    if (newScore === 0) {
+        if (endRule === "double-out" && ![2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 50].includes(points)) {
             alert("Du måste avsluta med en dubbel!");
+            return;
+        }
+        if (endRule === "master-out" && ![2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 50, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60].includes(points)) {
+            alert("Du måste avsluta med en dubbel eller trippel!");
             return;
         }
         alert(player.name + " har vunnit spelet!");
@@ -55,13 +65,12 @@ function registerScore(points) {
         return;
     }
 
-    // Uppdatera poäng om ingen bust skett
+    // Uppdatera poäng
     player.score = newScore;
     throws.push(points);
-    
+
     renderGame();
 
-    // Efter 3 kast byter vi spelare
     if (throws.length === 3) {
         setTimeout(nextPlayer, 1000);
     }
@@ -75,7 +84,7 @@ function nextPlayer() {
 
 function resetGame() {
     players.forEach(player => {
-        player.score = 301;
+        player.score = parseInt(localStorage.getItem("gameScore"));
         player.hasStarted = false;
     });
     currentPlayer = 0;
