@@ -3,27 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dart Score App</title>
+    <title>Dart Online</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="game-container">
-        <h1>Välkommen till Dart Score</h1>
-        <button class="main-btn" id="startGame">Välj Spel</button>
+        <h1>Välkommen till Dart Online</h1>
+
+        <!-- 🎯 Lobby: Hosta eller Joina ett spel -->
+        <div id="lobby">
+            <button class="main-btn" id="hostGame">Hosta ett spel</button>
+            <input type="text" id="joinCode" placeholder="Ange kod för att joina">
+            <button class="main-btn" id="joinGame">Joina</button>
+        </div>
+
+        <!-- 🎯 Matchkod: Visas för host -->
+        <div id="matchInfo" class="hidden">
+            <h2>Spelkod: <span id="gameCode"></span></h2>
+            <p id="playerStatus">Väntar på andra spelare...</p>
+        </div>
+
+        <!-- 🎯 Video & röstchatt -->
+        <div id="videoChat" class="hidden">
+            <h2>Videosamtal</h2>
+            <video id="localVideo" autoplay muted></video>
+            <video id="remoteVideo" autoplay></video>
+            <div class="video-controls">
+                <button id="toggleVideo">Video På/Av</button>
+                <button id="toggleAudio">Mikrofon På/Av</button>
+            </div>
+        </div>
+
+        <!-- 🎯 Starta spelet när alla är anslutna -->
+        <button class="next-btn hidden" id="startGame">Starta Spelet</button>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const startButton = document.getElementById("startGame");
-
-            if (startButton) {
-                startButton.addEventListener("click", function() {
-                    window.location.href = "game.html";
-                });
-            } else {
-                console.error("Startknappen kunde inte hittas.");
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
