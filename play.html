@@ -27,13 +27,6 @@
             <div class="throw-box" id="throw3">-</div>
         </div>
 
-        <!-- Enkel/Dubbel/Trippel val -->
-        <div class="multiplier-row">
-            <button class="multiplier selected" onclick="selectMultiplier(1)">Enkel</button>
-            <button class="multiplier" onclick="selectMultiplier(2)">Dubbel</button>
-            <button class="multiplier" onclick="selectMultiplier(3)">Trippel</button>
-        </div>
-
         <!-- MISS & BULL-knappar -->
         <div class="bull-row">
             <button class="miss" onclick="registerScore(0)">MISS</button>
@@ -64,6 +57,13 @@
             <button onclick="registerScore(18)">18</button>
             <button onclick="registerScore(19)">19</button>
             <button onclick="registerScore(20)">20</button>
+        </div>
+
+        <!-- Enkel/Dubbel/Trippel val (Flyttad under siffrorna, ovanför "Next Player") -->
+        <div class="multiplier-row">
+            <button class="multiplier selected" onclick="selectMultiplier(1)">Enkel</button>
+            <button class="multiplier" onclick="selectMultiplier(2)">Dubbel</button>
+            <button class="multiplier" onclick="selectMultiplier(3)">Trippel</button>
         </div>
 
         <button class="next-btn" onclick="nextPlayer()">NEXT PLAYER</button>
