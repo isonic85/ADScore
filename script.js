@@ -25,7 +25,7 @@ function renderGame() {
 function registerScore(points) {
     let player = players[currentPlayer];
 
-    // Double-In och Master-In
+    // Double-In och Master-In regler
     if (difficulty === "double-in" && !player.hasStarted) {
         if (![2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 50].includes(points)) {
             alert("Du måste starta med en dubbel!");
@@ -50,7 +50,7 @@ function registerScore(points) {
         return nextPlayer();
     }
 
-    // Kontrollera Double-Out eller Master-Out
+    // Double-Out och Master-Out regler
     if (newScore === 0) {
         if (endRule === "double-out" && ![2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 50].includes(points)) {
             alert("Du måste avsluta med en dubbel!");
@@ -65,7 +65,6 @@ function registerScore(points) {
         return;
     }
 
-    // Uppdatera poäng
     player.score = newScore;
     throws.push(points);
 
@@ -78,16 +77,6 @@ function registerScore(points) {
 
 function nextPlayer() {
     currentPlayer = (currentPlayer + 1) % players.length;
-    throws = [];
-    renderGame();
-}
-
-function resetGame() {
-    players.forEach(player => {
-        player.score = parseInt(localStorage.getItem("gameScore"));
-        player.hasStarted = false;
-    });
-    currentPlayer = 0;
     throws = [];
     renderGame();
 }
