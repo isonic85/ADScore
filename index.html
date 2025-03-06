@@ -3,38 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Dart Score</title>
+    <title>Online Dart Game</title>
 
-    <!-- Lägg till TensorFlow.js och COCO-SSD -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
-
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #videoContainer {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+        video {
+            width: 40%;
+            border: 2px solid black;
+            margin: 10px;
+        }
+        #controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input {
+            margin: 5px;
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>Auto Dart Score App</h1>
+    <h1>Online Dart Game</h1>
+    <div id="videoContainer">
+        <video id="player1Video" autoplay playsinline></video>
+        <video id="player2Video" autoplay playsinline></video>
+    </div>
 
-    <!-- Video element för kameran -->
-    <video id="video" autoplay playsinline></video>
-
-    <!-- Buttons for controlling the game -->
     <div id="controls">
+        <input type="number" id="player1Score" placeholder="Player 1 Score" />
+        <input type="number" id="player2Score" placeholder="Player 2 Score" />
         <button id="startBtn">Start Game</button>
-        <button id="stopBtn">Stop Game</button>
-        <button id="switchBtn">Switch Camera</button>
-    </div>
-
-    <!-- Score display -->
-    <div id="score">
-        <p>Player 1: <span id="player1Score">301</span></p>
-        <p>Player 2: <span id="player2Score">301</span></p>
-        <p id="gameMode">Game Mode: X01</p>
-    </div>
-
-    <!-- Dartboard score details -->
-    <div id="dartboardInfo">
-        <p>Current throw: <span id="currentThrow">Player 1</span></p>
-        <p>Current Points: <span id="currentPoints">0</span></p>
     </div>
 
     <script src="script.js"></script>
