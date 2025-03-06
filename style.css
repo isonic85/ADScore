@@ -39,25 +39,29 @@ h1, h2 {
     display: none;
 }
 
-/* Endast aktiv spelare syns */
+/* Endast aktiv spelare syns - Smalare box, tajtare text */
 .player.active {
     display: block;
     background: #f8c471;
     color: black;
-    padding: 15px;
-    border-radius: 10px;
+    padding: 8px 12px; /* Minskad padding för tajtare text */
+    border-radius: 8px;
     text-align: center;
+    width: 70%; /* Gör boxen smalare */
+    max-width: 280px;
 }
 
 /* Se till att spelarens namn alltid syns korrekt */
 .player.active h2 {
     color: black !important;
+    font-size: 20px; /* Gör namnet lite mindre för bättre balans */
+    margin-bottom: 5px;
 }
 
-/* Se till att poängen också är tydlig */
+/* Gör poängen större och mer framträdande */
 .player.active .score {
     color: black !important;
-    font-size: 36px;
+    font-size: 40px; /* Ökar storleken på poängen */
     font-weight: bold;
 }
 
@@ -65,7 +69,7 @@ h1, h2 {
 .throw-tracker {
     display: flex;
     justify-content: center;
-    gap: 8px; /* Mindre mellanrum */
+    gap: 8px;
     margin: 8px 0;
 }
 
@@ -100,7 +104,7 @@ h1, h2 {
     color: white;
     cursor: pointer;
     transition: background 0.3s, transform 0.1s;
-    margin: 4px; /* Mindre mellanrum */
+    margin: 4px;
 }
 
 .multiplier:hover {
@@ -124,7 +128,7 @@ button {
     cursor: pointer;
     transition: background 0.3s, transform 0.1s;
     width: auto;
-    margin: 4px; /* Mindre mellanrum */
+    margin: 4px;
 }
 
 /* Hover-effekt */
@@ -144,7 +148,7 @@ button:active {
     color: black;
     padding: 12px;
     font-size: 20px;
-    margin: 6px; /* Mindre mellanrum */
+    margin: 6px;
 }
 
 /* Markerade val (spelval, svårighet, avslutsregel) */
