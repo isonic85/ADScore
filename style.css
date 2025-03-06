@@ -17,8 +17,6 @@ body {
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
-    overflow: hidden;
-    position: relative;
 }
 
 /* Huvudrubrik */
@@ -29,62 +27,95 @@ h1, h2 {
     color: #f8c471;
 }
 
-/* Poängtavla med roterande effekt */
+/* Poängställning */
 .scoreboard {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
     position: relative;
-    width: 100%;
-    height: 120px;
-    overflow: hidden;
 }
 
 .player {
-    position: absolute;
-    transition: transform 0.5s ease-in-out, opacity 0.5s;
-    width: 30%;
-    text-align: center;
-    background: #333;
-    padding: 10px;
+    flex: 1;
+    padding: 15px;
     border-radius: 10px;
+    background: #333;
+    margin: 5px;
+    text-align: center;
     color: white;
-    opacity: 0.5;
-    transform: scale(0.8);
 }
 
 .player.active {
-    width: 40%;
     background: #f8c471;
     color: black !important;
-    opacity: 1;
-    transform: scale(1) translateX(0);
-    z-index: 2;
 }
 
-.player.previous {
-    transform: translateX(-100%) scale(0.7);
+/* Roterande effekt endast för spelarnamn och poäng */
+.scoreboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.player-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.player-card {
+    min-width: 100%;
+    text-align: center;
     opacity: 0.5;
-    z-index: 1;
+    transition: opacity 0.5s;
 }
 
-.player.next {
-    transform: translateX(100%) scale(0.7);
-    opacity: 0.5;
-    z-index: 1;
-}
-
-/* Animation när spelarna byts */
-.rotate-animation .player.active {
-    transform: scale(1) translateX(0);
-}
-
-.rotate-animation .player.previous {
-    transform: translateX(-150%) scale(0.6);
-    opacity: 0;
-}
-
-.rotate-animation .player.next {
-    transform: translateX(0) scale(1);
+.player-card.active {
     opacity: 1;
+}
+
+/* Knappar och interaktiva element */
+button {
+    background: #444;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+}
+
+button:hover {
+    background: #666;
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.main-btn {
+    background: #f8c471;
+    color: black;
+}
+
+.main-btn:hover {
+    background: #e0ac5f;
+}
+
+/* Nästa spelare knapp */
+.next-btn {
+    width: 100%;
+    background: #27ae60;
+    color: white;
+    margin-top: 20px;
+    padding: 15px;
+}
+
+.next-btn:hover {
+    background: #218c53;
 }
