@@ -36,9 +36,13 @@ function stopGame() {
 
 // Load TensorFlow.js model for dart detection
 async function loadModel() {
-    model = await cocoSsd.load(); // Load pre-trained model
-    console.log("Model loaded!");
-    detectDartThrow();
+    try {
+        model = await cocoSsd.load(); // Load pre-trained model
+        console.log("Model loaded!");
+        detectDartThrow();
+    } catch (error) {
+        console.error("Error loading model:", error);
+    }
 }
 
 // Start the camera
@@ -87,11 +91,13 @@ async function detectDartThrow() {
     }
 
     const predictions = await model.detect(video); // Make prediction on the video feed
+    console.log("Predictions:", predictions);
 
     // Simulate dart detection based on object detection model
     const dartHit = predictions.find(p => p.class === 'dart'); // Look for 'dart' class in predictions
 
     if (dartHit) {
+        console.log("Dart hit detected:", dartHit);
         // Simulate assigning points based on where dart hit the board
         let points = Math.floor(Math.random() * 20) + 1; // Random points for testing
         updatePoints(points);
