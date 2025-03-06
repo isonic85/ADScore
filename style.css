@@ -70,7 +70,7 @@ h1 {
     background: #218c53;
 }
 
-/* Enkel, Dubbel, Trippel val (används nu också för Offline, Create, Join) */
+/* Offline, Create, Join knappar */
 .multiplier-row {
     display: flex;
     justify-content: space-around;
