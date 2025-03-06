@@ -1,3 +1,4 @@
+/* Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 body {
@@ -16,6 +17,62 @@ body {
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Huvudrubrik */
+h1, h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* Rutnätslayout för valknappar */
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+/* Knappar */
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+/* Menyvalsknappar */
+.main-btn {
+    background: #007bff;
+    color: white;
+}
+
+.main-btn:hover {
+    background: #0056b3;
+}
+
+/* Markerad knapp */
+.selected {
+    background: #ff9800 !important;
+    color: black !important;
+}
+
+/* Starta spelet-knapp */
+.next-btn {
+    width: 100%;
+    background: #27ae60;
+    color: white;
+    margin-top: 20px;
+    padding: 15px;
+}
+
+.next-btn:hover {
+    background: #218c53;
 }
 
 /* Poängställning */
