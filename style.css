@@ -1,4 +1,3 @@
-/* Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 body {
@@ -6,8 +5,6 @@ body {
     text-align: center;
     background: #121212;
     color: white;
-    margin: 0;
-    padding: 20px;
 }
 
 .game-container {
@@ -16,90 +13,34 @@ body {
     background: #1e1e1e;
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
 }
 
-/* Poängställning i en rad */
+/* Knappar */
+button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.main-btn {
+    background: #007bff;
+    color: white;
+}
+
+.next-btn {
+    background: #27ae60;
+    color: white;
+}
+
+/* Poängställning */
 .scoreboard {
     display: flex;
     justify-content: space-between;
     padding: 10px;
 }
 
-.player {
-    flex: 1;
-    padding: 15px;
-    border-radius: 10px;
-    background: #333;
-    margin: 5px;
-    text-align: center;
-}
-
-.player.active {
-    background: #f8c471;
-    color: black;
-}
-
-.score {
-    font-size: 36px;
-    font-weight: bold;
-}
-
-/* MISS & BULL-knappar på samma rad */
-.bull-row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-
-.bull-row button {
-    flex: 1;
-    margin: 5px;
-    padding: 12px;
-}
-
-.miss {
-    background: #ff4c4c;
-    color: white;
-}
-
-.bull {
-    background: #f1c40f;
-    color: black;
-}
-
-/* Poänginmatning som ett rutnät */
 .number-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
-    margin-top: 10px;
-}
-
-.number-grid button {
-    background: #007bff;
-    color: white;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-}
-
-.number-grid button:hover {
-    background: #0056b3;
-}
-
-/* Nästa spelare knapp */
-.next-btn {
-    width: 100%;
-    background: #27ae60;
-    color: white;
-    margin-top: 20px;
-    padding: 15px;
-}
-
-.next-btn:hover {
-    background: #218c53;
 }
