@@ -1,67 +1,36 @@
-/* Grundläggande stil för body */
+/* style.css */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
+    text-align: center;
+    background: #f4f4f4;
+    margin: 20px;
+}
+.container {
+    max-width: 400px;
+    margin: auto;
+    background: white;
     padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.input-group {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    box-sizing: border-box;
-}
-
-h1 {
-    color: #333;
+    gap: 10px;
     margin-bottom: 20px;
 }
-
-#video {
-    position: relative;
-    border: 2px solid #333;
-    width: 100%; /* Fyll hela bredden */
-    max-width: 640px; /* Maximal bredd på videon */
-    max-height: 480px; /* Maximal höjd på videon */
-    height: auto;
-    object-fit: contain; /* Behåller förhållandet för video */
-    margin-bottom: 20px;
-}
-
 button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 10px;
+    background: blue;
+    color: white;
+    border: none;
     cursor: pointer;
 }
-
-#controls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+button:hover {
+    background: darkblue;
 }
-
-#score, #dartboardInfo {
-    margin-top: 20px;
-    font-size: 18px;
-    color: #333;
-}
-
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    #video {
-        max-height: 300px;
-    }
-
-    button {
-        width: 100%;
-        margin: 10px 0;
-    }
-
-    #score {
-        font-size: 16px;
-    }
+.player-card {
+    background: #ddd;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
 }
