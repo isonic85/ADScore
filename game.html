@@ -9,9 +9,11 @@
 <body>
     <div class="game-container">
         <h1>Välj Variant</h1>
-        <button class="main-btn" onclick="selectVariant(301)">301</button>
-        <button class="main-btn" onclick="selectVariant(501)">501</button>
-        <button class="main-btn" onclick="selectVariant(701)">701</button>
+        <div class="button-grid">
+            <button class="main-btn" onclick="selectVariant(301)">301</button>
+            <button class="main-btn" onclick="selectVariant(501)">501</button>
+            <button class="main-btn" onclick="selectVariant(701)">701</button>
+        </div>
     </div>
     <script>
         function selectVariant(score) {
