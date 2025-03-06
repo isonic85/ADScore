@@ -17,8 +17,9 @@
     </div>
     <script>
         function selectVariant(score) {
+            if (!score) return; // Säkerhetsskydd om ingen poäng är vald
             localStorage.setItem("gameScore", score);
-            window.location.href = "players.html";
+            window.location.href = "players.html"; // Se till att filen finns
         }
     </script>
 </body>
