@@ -25,6 +25,12 @@ function renderGame() {
 function registerScore(points) {
     let player = players[currentPlayer];
 
+    // Stoppa om spelaren redan har kastat 3 gånger
+    if (throws.length >= 3) {
+        alert("Du har kastat 3 gånger! Nästa spelare tur.");
+        return;
+    }
+
     // Double-In och Master-In regler
     if (difficulty === "double-in" && !player.hasStarted) {
         if (![2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 50].includes(points)) {
@@ -56,6 +62,10 @@ function registerScore(points) {
             alert("Du måste avsluta med en dubbel!");
             return;
         }
+        if (endRule === "master-out" && ![2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 50, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60].includes(points)) {
+            alert("Du måste avsluta med en dubbel eller trippel!");
+            return;
+        }
         alert(player.name + " har vunnit spelet!");
         resetGame();
         return;
@@ -66,9 +76,16 @@ function registerScore(points) {
 
     renderGame();
 
+    // Om 3 kast är gjorda, byt till nästa spelare efter en kort paus
     if (throws.length === 3) {
         setTimeout(nextPlayer, 1000);
     }
+}
+
+function nextPlayer() {
+    currentPlayer = (currentPlayer + 1) % players.length;
+    throws = []; // Nollställ kast för nästa spelare
+    renderGame();
 }
 
 document.addEventListener("DOMContentLoaded", renderGame);
