@@ -13,6 +13,7 @@ let currentDevice = "user"; // Start with front camera
 let player1Score = 301;
 let player2Score = 301;
 let currentPlayer = 1;
+let model;
 
 startBtn.addEventListener("click", startGame);
 stopBtn.addEventListener("click", stopGame);
@@ -25,11 +26,19 @@ function startGame() {
     updateScore();
     currentThrowElem.textContent = `Player 1's turn`;
     startCamera();
+    loadModel();
 }
 
 // Stop the game
 function stopGame() {
     stopCamera();
+}
+
+// Load TensorFlow.js model for dart detection
+async function loadModel() {
+    model = await cocoSsd.load(); // Load pre-trained model
+    console.log("Model loaded!");
+    detectDartThrow();
 }
 
 // Start the camera
@@ -70,26 +79,39 @@ function updateScore() {
     player2ScoreElem.textContent = player2Score;
 }
 
-// Simulate a dartboard hit
-function detectDartHit() {
-    // Simulate a random dart hit with points between 1 and 20
-    let points = Math.floor(Math.random() * 20) + 1; // Random points between 1 and 20
-    updatePoints(points);
+// Detect dart throw and calculate points
+async function detectDartThrow() {
+    if (!model) {
+        console.log("Model not loaded yet!");
+        return;
+    }
+
+    const predictions = await model.detect(video); // Make prediction on the video feed
+
+    // Simulate dart detection based on object detection model
+    const dartHit = predictions.find(p => p.class === 'dart'); // Look for 'dart' class in predictions
+
+    if (dartHit) {
+        // Simulate assigning points based on where dart hit the board
+        let points = Math.floor(Math.random() * 20) + 1; // Random points for testing
+        updatePoints(points);
+    }
+
+    // Call the detection function again after 100 milliseconds
+    setTimeout(detectDartThrow, 100);
 }
 
-// Update the points based on dart hit
+// Update points for the player based on dart hit
 function updatePoints(points) {
     if (currentPlayer === 1) {
         player1Score -= points;
-        currentPlayer = 2;  // Switch to player 2
+        currentPlayer = 2; // Switch to player 2
     } else {
         player2Score -= points;
-        currentPlayer = 1;  // Switch to player 1
+        currentPlayer = 1; // Switch to player 1
     }
+
     currentPointsElem.textContent = points;
     updateScore();
-    currentThrowElem.textContent = `Player ${currentPlayer}'s turn`; // Show whose turn it is
+    currentThrowElem.textContent = `Player ${currentPlayer}'s turn`;
 }
-
-// Simulate a round every 5 seconds for testing
-setInterval(detectDartHit, 5000);
