@@ -8,19 +8,46 @@
 </head>
 <body>
     <div class="game-container">
-        <h1>Välkommen till Dart Online</h1>
+        <h1>Välkommen till Dart</h1>
 
-        <!-- 🎯 Lobby: Hosta eller Joina ett spel -->
-        <div id="lobby">
+        <!-- 🎯 Välkomstmeny -->
+        <div id="welcomeMenu">
+            <button class="main-btn" id="playOffline">Spela Offline</button>
+            <button class="main-btn" id="playOnline">Spela Online</button>
+        </div>
+
+        <!-- 🎯 Online Lobby: Hosta eller Joina -->
+        <div id="onlineLobby" class="hidden">
             <button class="main-btn" id="hostGame">Hosta ett spel</button>
             <input type="text" id="joinCode" placeholder="Ange kod för att joina">
             <button class="main-btn" id="joinGame">Joina</button>
+            <button class="main-btn" id="backToMenu">Tillbaka</button>
         </div>
 
-        <!-- 🎯 Matchkod: Visas för host -->
+        <!-- 🎯 Spelval (Endast för host) -->
+        <div id="gameSettings" class="hidden">
+            <h2>Välj Speltyp</h2>
+            <button class="game-option" data-game="301">301</button>
+            <button class="game-option" data-game="501">501</button>
+            <button class="game-option" data-game="701">701</button>
+            
+            <h2>Välj Svårighetsgrad</h2>
+            <button class="difficulty-option" data-difficulty="straight-in">Straight-In</button>
+            <button class="difficulty-option" data-difficulty="double-in">Double-In</button>
+            
+            <h2>Välj Avslutsregel</h2>
+            <button class="endrule-option" data-endrule="straight-out">Straight-Out</button>
+            <button class="endrule-option" data-endrule="double-out">Double-Out</button>
+
+            <button class="next-btn" id="startHosting">Skapa Match</button>
+            <button class="main-btn" id="backToLobby">Tillbaka</button>
+        </div>
+
+        <!-- 🎯 Matchkod och väntan på spelare -->
         <div id="matchInfo" class="hidden">
             <h2>Spelkod: <span id="gameCode"></span></h2>
             <p id="playerStatus">Väntar på andra spelare...</p>
+            <button class="next-btn hidden" id="startGame">Starta Spelet</button>
         </div>
 
         <!-- 🎯 Video & röstchatt -->
@@ -33,9 +60,6 @@
                 <button id="toggleAudio">Mikrofon På/Av</button>
             </div>
         </div>
-
-        <!-- 🎯 Starta spelet när alla är anslutna -->
-        <button class="next-btn hidden" id="startGame">Starta Spelet</button>
     </div>
 
     <script src="script.js"></script>
