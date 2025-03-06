@@ -13,30 +13,35 @@ const endRule = localStorage.getItem("gameEndRule") || "double-out";
 function renderGame() {
     const scoreboard = document.querySelector(".scoreboard");
     scoreboard.innerHTML = "";
-
-    players.forEach((player, index) => {
-        let playerDiv = document.createElement("div");
-        playerDiv.classList.add("player");
-        if (index === currentPlayer) {
-            playerDiv.classList.add("active");
-        } else if (index === (currentPlayer - 1 + players.length) % players.length) {
-            playerDiv.classList.add("previous");
-        } else if (index === (currentPlayer + 1) % players.length) {
-            playerDiv.classList.add("next");
-        }
-        playerDiv.innerHTML = `<h2>${player.name}</h2><p class="score">${player.score}</p>`;
-        scoreboard.appendChild(playerDiv);
-    });
+    
+    let prevPlayer = (currentPlayer - 1 + players.length) % players.length;
+    let nextPlayer = (currentPlayer + 1) % players.length;
+    
+    let prevDiv = document.createElement("div");
+    prevDiv.classList.add("player", "previous");
+    prevDiv.innerHTML = `<h2>${players[prevPlayer].name}</h2><p class="score">${players[prevPlayer].score}</p>`;
+    scoreboard.appendChild(prevDiv);
+    
+    let activeDiv = document.createElement("div");
+    activeDiv.classList.add("player", "active");
+    activeDiv.innerHTML = `<h2>${players[currentPlayer].name}</h2><p class="score">${players[currentPlayer].score}</p>`;
+    scoreboard.appendChild(activeDiv);
+    
+    let nextDiv = document.createElement("div");
+    nextDiv.classList.add("player", "next");
+    nextDiv.innerHTML = `<h2>${players[nextPlayer].name}</h2><p class="score">${players[nextPlayer].score}</p>`;
+    scoreboard.appendChild(nextDiv);
 }
 
 function rotatePlayers() {
-    const playersList = document.querySelectorAll(".player");
-    playersList.forEach(player => {
-        player.style.transition = "transform 0.5s ease-in-out, opacity 0.5s";
-    });
+    const scoreboard = document.querySelector(".scoreboard");
+    scoreboard.classList.add("rotate-animation");
     
-    currentPlayer = (currentPlayer + 1) % players.length;
-    renderGame();
+    setTimeout(() => {
+        scoreboard.classList.remove("rotate-animation");
+        currentPlayer = (currentPlayer + 1) % players.length;
+        renderGame();
+    }, 500);
 }
 
 function registerScore(points) {
