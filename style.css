@@ -91,15 +91,16 @@ h1, h2 {
 
 .multiplier {
     flex: 1;
-    padding: 10px;
-    font-size: 16px;
+    padding: 8px; /* Smalare ram */
+    font-size: 18px; /* Större text */
     font-weight: bold;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px; /* Smalare rundning */
     background: #444;
     color: white;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.1s;
+    margin: 5px; /* Ger mer mellanrum */
 }
 
 .multiplier:hover {
@@ -115,14 +116,15 @@ h1, h2 {
 button {
     background: #444;
     color: white;
-    padding: 12px;
-    font-size: 16px;
+    padding: 10px; /* Mindre padding för smalare knappar */
+    font-size: 18px; /* Större text */
     font-weight: bold;
-    border-radius: 8px;
+    border-radius: 6px; /* Mindre rundning */
     border: none;
     cursor: pointer;
     transition: background 0.3s, transform 0.1s;
     width: auto;
+    margin: 6px; /* Ger luft mellan knappar */
 }
 
 /* Hover-effekt */
@@ -140,8 +142,9 @@ button:active {
 .main-btn {
     background: #f8c471;
     color: black;
-    padding: 15px;
-    font-size: 18px;
+    padding: 12px;
+    font-size: 20px; /* Gör huvudknappar extra tydliga */
+    margin: 8px;
 }
 
 /* Markerade val (spelval, svårighet, avslutsregel) */
@@ -155,8 +158,10 @@ button:active {
     width: 100%;
     background: #27ae60;
     color: white;
-    margin-top: 20px;
-    padding: 15px;
+    margin-top: 15px;
+    padding: 12px;
+    font-size: 18px;
+    border-radius: 6px;
 }
 
 .next-btn:hover {
