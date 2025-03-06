@@ -1,6 +1,7 @@
+// Laddar spelare från localStorage eller skapar standardspelare
 let players = JSON.parse(localStorage.getItem("players")) || [
-    { name: "Spelare 1", score: parseInt(localStorage.getItem("gameScore")), hasStarted: false },
-    { name: "Spelare 2", score: parseInt(localStorage.getItem("gameScore")), hasStarted: false }
+    { name: "Spelare 1", score: parseInt(localStorage.getItem("gameScore")) || 301, hasStarted: false },
+    { name: "Spelare 2", score: parseInt(localStorage.getItem("gameScore")) || 301, hasStarted: false }
 ];
 
 let currentPlayer = 0;
@@ -12,17 +13,25 @@ const endRule = localStorage.getItem("gameEndRule") || "double-out";
 
 // Renderar poängtavlan och kastboxar
 function renderGame() {
-    document.getElementById("player1-name").textContent = players[0].name;
-    document.getElementById("player1-score").textContent = players[0].score;
-    document.getElementById("player2-name").textContent = players[1].name;
-    document.getElementById("player2-score").textContent = players[1].score;
+    const scoreboard = document.querySelector(".scoreboard");
+    scoreboard.innerHTML = ""; // Rensar poängtavlan innan vi renderar den igen
 
+    players.forEach((player, index) => {
+        let playerDiv = document.createElement("div");
+        playerDiv.classList.add("player");
+        
+        if (index === currentPlayer) {
+            playerDiv.classList.add("active"); // Endast aktiv spelare syns
+        }
+
+        playerDiv.innerHTML = `<h2>${player.name}</h2><p class="score">${player.score}</p>`;
+        scoreboard.appendChild(playerDiv);
+    });
+
+    // Uppdaterar kastboxarna
     document.getElementById("throw1").textContent = throws[0] || "-";
     document.getElementById("throw2").textContent = throws[1] || "-";
     document.getElementById("throw3").textContent = throws[2] || "-";
-
-    document.getElementById("player1").classList.toggle("active", currentPlayer === 0);
-    document.getElementById("player2").classList.toggle("active", currentPlayer === 1);
 }
 
 // Hanterar multiplikatorval
@@ -39,7 +48,7 @@ function registerScore(points) {
     let player = players[currentPlayer];
 
     if (throws.length === 0) {
-        roundStartScore = player.score;
+        roundStartScore = player.score; // Spara startpoängen vid första kastet
     }
 
     if (throws.length >= 3) {
@@ -98,7 +107,7 @@ function registerScore(points) {
 
 // Växlar till nästa spelare
 function nextPlayer() {
-    currentPlayer = (currentPlayer + 1) % players.length;
+    currentPlayer = (currentPlayer + 1) % players.length; // Cirkulerar genom spelarna
     throws = [];
     roundStartScore = players[currentPlayer].score;
     renderGame();
