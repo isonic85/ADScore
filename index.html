@@ -3,41 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dart Score - Start</title>
+    <title>Dart Score App</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="game-container">
-        <h1>Välj spel och inställningar</h1>
-
-        <!-- Rullista för spelval -->
-        <div class="dropdown-container">
-            <label for="gameSelect">Välj spel:</label>
-            <select id="gameSelect">
-                <option value="x01">X01</option>
-                <option value="cricket">Cricket</option>
-                <option value="around-the-clock">Around The Clock</option>
-            </select>
-        </div>
-
-        <!-- Ange och spara eget spelarnamn -->
-        <div class="input-container">
-            <label for="playerName">Ditt spelarnamn:</label>
-            <input type="text" id="playerName" placeholder="Ange ditt namn">
-            <button onclick="savePlayerName()">Spara</button>
-        </div>
-
-        <!-- Spel-läge val (Offline, Create, Join) -->
-        <div class="multiplier-row">
-            <button class="multiplier selected" data-mode="offline" onclick="selectGameMode('offline')">Offline</button>
-            <button class="multiplier" data-mode="create" onclick="selectGameMode('create')">Create</button>
-            <button class="multiplier" data-mode="join" onclick="selectGameMode('join')">Join</button>
-        </div>
-
-        <!-- Knapp för att gå vidare och välja spelare -->
-        <button class="next-btn" onclick="startGame()">Nästa</button>
+        <h1>Välkommen till Dart Score</h1>
+        <button class="main-btn" id="startGame">Välj Spel</button>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const startButton = document.getElementById("startGame");
+
+            if (startButton) {
+                startButton.addEventListener("click", function() {
+                    window.location.href = "game.html";
+                });
+            } else {
+                console.error("Startknappen kunde inte hittas.");
+            }
+        });
+    </script>
 </body>
 </html>
