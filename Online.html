@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Spel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Online Spel</h1>
+        <button class="main-btn" id="createGame">Create</button>
+        <button class="main-btn" id="joinGame">Join</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("createGame").addEventListener("click", function() {
+                alert("Skapa ett nytt spel - Funktionalitet kommer senare!");
+            });
+            document.getElementById("joinGame").addEventListener("click", function() {
+                window.location.href = "join.html"; // Se till att denna fil existerar
+            });
+        });
+    </script>
+</body>
+</html>
