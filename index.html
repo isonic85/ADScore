@@ -3,22 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dart Score App</title>
+    <title>Välj Spelformat</title>
     <link rel="stylesheet" href="style.css">
-    <meta http-equiv="refresh" content="0;url=Start.html">
 </head>
 <body>
     <div class="game-container">
-        <h1>Välkommen till Dart Score</h1>
-        <p>Omdirigerar till start...</p>
-        <p>Om du inte omdirigeras automatiskt, <a href="Start.html">klicka här</a>.</p>
+        <h1>Välj Spelformat</h1>
+        <button class="main-btn" id="x01Game">X01</button>
+        <button class="main-btn" id="cricketGame">Cricket</button>
+        <button class="main-btn" id="futureGame">Kommande Spel</button>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            setTimeout(function() {
-                window.location.href = "Start.html";
-            }, 1000); // För säkerhet, om meta-redirect inte fungerar
+            document.getElementById("x01Game").addEventListener("click", function() {
+                window.location.href = "game.html"; // X01-läget
+            });
+            document.getElementById("cricketGame").addEventListener("click", function() {
+                alert("Cricket-läget är inte tillgängligt ännu!"); // Kan bytas ut mot en riktig sida senare
+            });
+            document.getElementById("futureGame").addEventListener("click", function() {
+                alert("Fler spellägen kommer snart!");
+            });
         });
     </script>
 </body>
