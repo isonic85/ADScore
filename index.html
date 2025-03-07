@@ -5,24 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dart Score App</title>
     <link rel="stylesheet" href="style.css">
+    <meta http-equiv="refresh" content="0;url=Start.html">
 </head>
 <body>
     <div class="game-container">
         <h1>Välkommen till Dart Score</h1>
-        <button class="main-btn" id="startGame">X01</button>
+        <p>Omdirigerar till start...</p>
+        <p>Om du inte omdirigeras automatiskt, <a href="Start.html">klicka här</a>.</p>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const startButton = document.getElementById("startGame");
-
-            if (startButton) {
-                startButton.addEventListener("click", function() {
-                    window.location.href = "game.html";
-                });
-            } else {
-                console.error("Startknappen kunde inte hittas.");
-            }
+            setTimeout(function() {
+                window.location.href = "Start.html";
+            }, 1000); // För säkerhet, om meta-redirect inte fungerar
         });
     </script>
 </body>
